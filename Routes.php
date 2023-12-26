@@ -15,6 +15,7 @@ return [
 
     #auction routes
     Route::get('|^auction/([0-9]+)/?$|',               'Auction',                'show'),
+    Route::post('|^search/?$|',                        'Auction',                'postSearch'),
 
     #API routes:
     Route::get('|^api/auction/([0-9]+)/?$|',           'ApiAuction',             'show'),

@@ -27,4 +27,22 @@
         public function getAllByCategoryId(int $categoryId): array {
             return $this->getAllByFieldName('category_id', $categoryId);
         }
+
+        public function getAllBySearch(string $keywords) {
+            $sql = 'SELECT * FROM `auction` WHERE `title` LIKE ? OR `description` LIKE ?;';
+
+            $keywords = '%' . $keywords . '%';
+
+            $prep = $this->getConnection()->prepare($sql);
+            if (!$prep) {
+                return [];
+            }
+
+            $res = $prep->execute([$keywords, $keywords]);
+            if (!$prep) {
+                return [];
+            }
+
+            return $prep->fetchAll(\PDO::FETCH_OBJ);
+        }
     }
