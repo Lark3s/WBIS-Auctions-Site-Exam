@@ -1,0 +1,125 @@
+.social-icons {
+    margin-bottom: 10px;
+}
+
+.social-icons a i.fa-brands {
+    display: inline-block;
+    color: #dc0004;
+    font-size: 16pt;
+    margin: 5px;
+}
+
+.category {
+    padding: 30px 0px;
+}
+
+/** {*/
+/*    box-sizing: border-box;*/
+/*    padding: 0px;*/
+/*    margin: 0px;*/
+/*}*/
+
+/*body {*/
+/*    width: 900px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.site-header {*/
+/*    display: grid;*/
+/*    grid-template-areas: "banner social"*/
+/*                        "banner search"*/
+/*                        "menu menu";*/
+/*}*/
+
+/*.banners { grid-area: banner; }*/
+/*.social-icons { grid-area: social; text-align: right; }*/
+/**/
+
+/*.social-icons img {*/
+/*    height: 24px;*/
+/*    width: 24px;*/
+/*    margin: 0px 10px;*/
+/*}*/
+
+/*#main-menu {*/
+/*    grid-area: menu;*/
+/*    margin: 20px 0px;*/
+/*}*/
+
+/*#main-menu > ul {*/
+/*    list-style: none;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    align-items: stretch;*/
+/*    align-content: stretch;*/
+/*}*/
+
+/*#main-menu > ul > li {*/
+/*    flex-grow: 1;*/
+/*    text-align: center;*/
+/*}*/
+
+/*#main-menu > ul > li:hover {*/
+/*    background: rgba(200, 200, 200, 0.3);*/
+/*}*/
+
+/*#main-menu > ul > li > a {*/
+/*    display: block;*/
+/*    padding: 10px 0px;*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*}*/
+
+/*.categories {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    align-content: stretch;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.category {*/
+/*    width: 50%;*/
+/*    text-align: center;*/
+/*    padding: 50px 100px;*/
+/*    border: 1px solid #ccc;*/
+/*    background: rgba(200, 200, 200, 0.2);*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*}*/
+
+/*.category:hover {*/
+/*    border: 1px solid #ccc;*/
+/*    background: rgba(200, 200, 200, 0.6);*/
+/*}*/
+
+/*.site-footer {*/
+/*    margin-top: 40px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.auction {*/
+/*    display: grid;*/
+/*    grid-template-areas: "big-image big-image small-image-1 title title title"*/
+/*                         "big-image big-image small-image-2 date1 date2 price";*/
+/*    grid-template-columns: 120px 0px 100px auto;*/
+/*    border-bottom: 1px solid #444;*/
+/*    margin-bottom: 5px;*/
+/*    padding-bottom: 5px;*/
+/*}*/
+
+/*.auction > .auction-title { grid-area: title; }*/
+/*.auction > .auction-date1 { grid-area: date1; }*/
+/*.auction > .auction-date2 { grid-area: date2; }*/
+/*.auction > .auction-price { grid-area: price; }*/
+/*.auction > .auction-big-image { grid-area: big-image; height: 100px; width: 120px }*/
+/*.auction > .image-1 { grid-area: small-image-1; width: 80px }*/
+/*.auction > .image-2 { grid-area: small-image-2; width: 80px }*/
+
+/*.bookmarks {*/
+/*    display: block;*/
+/*    position: fixed;*/
+/*    top: 50px;*/
+/*    right: 0px;*/
+/*    border: 1px solid #000000;*/
+/*    background: #fefefe;*/
+/*}*/

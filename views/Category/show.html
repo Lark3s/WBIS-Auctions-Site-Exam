@@ -1,0 +1,31 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+
+    <ul>
+        {% for auction in auctionsInCategory %}
+        <li class="auction">
+            <a href="{{ BASE }}auction/{{ auction.auction_id }}" class="auction-title">
+                {{ auction.title|escape }}
+            </a><br>
+
+            <span class="auction-date1"> {{ auction.created_at|escape }} </span>
+            <span class="auction-date2"> {{ auction.expires_at|escape }} </span>
+            <span class="auction-price"> {{ auction.starting_price|escape }} RSD</span>
+
+            <a href="{{ BASE }}auction/{{ auction.auction_id }}" class="auction-big-image">
+                <img src="{{ BASE }}assets/uploads/{{ auction.auction_id }}" alt="Velika slika - {{ auction.auction_id }}">
+            </a>
+<!--            <br>-->
+<!--            <img src="#" alt="Mala slika 2- {{ auction.auction_id }}" class="auction-small-image image-2">-->
+<!--            <img src="#" alt="Mala slika 1 - {{ auction.auction_id }}" class="auction-small-image image-1">-->
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block naslov %}
+
+{{ category.name|escape }}
+
+{% endblock %}

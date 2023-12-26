@@ -1,0 +1,74 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<div class="row my-4">
+    <form action="{{ BASE }}user/register" method="POST" class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-lg-3">
+        <div class="card">
+            <div class="card-header text-center">
+                User registration
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="input_email" class="form-label">E-mail:</label>
+                    <div class="">
+                        <input type="email" class="form-control" id="input_email" name="reg_email" required placeholder="Unesite svoju adresu e-poste u ovo polje">
+                    </div>
+                </div>
+                <!--        <div class="row mb-3">-->
+                <!--            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>-->
+                <!--            <div class="col-sm-10">-->
+                <!--                <input type="email" class="form-control" id="inputEmail3">-->
+                <!--            </div>-->
+                <div class="mb-3">
+                    <label for="input_forename" class="form-label">Forename</label>
+                    <div class="">
+                        <input type="text" class="form-control" id="input_forename" name="reg_forename" required placeholder="Unesite Vase ime">
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="input_surname" class="form-label">Surname</label>
+                    <div class="">
+                        <input type="text" class="form-control" id="input_surname" name="reg_surname" required placeholder="Unesite Vase prezime">
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="input_username" class=form-label">Username</label>
+                    <div class="">
+                        <input type="text" class="form-control" id="input_username" name="reg_username" required placeholder="Unesite zeljeno korisnicko ime">
+                    </div>
+
+                </div>
+                <div class="mb-3">
+                    <label for="input_password_1" class="form-label">Password</label>
+                    <div class="">
+                        <input type="password" class="form-control" id="input_password_1" name="reg_password_1" required placeholder="Unesite zeljenu lozinku">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="input_password_2" class="form-label">Confirm password</label>
+                    <div class="">
+                        <input type="password" class="form-control" id="input_password_2" name="reg_password_2" required placeholder="Ponovite zeljenu lozinku">
+                    </div>
+                </div>
+
+                <!--        <div class="row mb-3">-->
+                <!--            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>-->
+                <!--            <div class="col-sm-10">-->
+                <!--                <input type="password" class="form-control" id="inputPassword3">-->
+                <!--            </div>-->
+                <!--        </div>-->
+
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary">
+                    Register
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

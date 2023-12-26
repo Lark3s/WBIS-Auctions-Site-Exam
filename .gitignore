@@ -1,0 +1,6 @@
+twig-cache/
+vendor/
+sessions/
+assets/libs/
+.idea/
+Configuration.php

@@ -1,0 +1,21 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}user/categories/add">Add new category</a>
+    </div>
+
+    <div class="categories">
+        <ul>
+            {% for category in categories %}
+            <li>
+                <a href="{{ BASE }}user/categories/edit/{{ category.category_id }}">
+                    {{ category.name|escape }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

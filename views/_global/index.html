@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <title>Larkes - {% block naslov %}Pocetna{% endblock %}</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ BASE }}assets/css/main.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/@fortawesome/fontawesome-free/css/brands.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/@fortawesome/fontawesome-free/css/solid.min.css">
+        <link rel="stylesheet" href="{{ BASE }}assets/libs/@fortawesome/fontawesome-free/css/regular.min.css">
+        <link rel="icon" type="image/site-icon" href="{{ BASE }}assets/img/favicon.ico">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <div class="row">
+                    <div class="col col-sm">
+                        <a href="{{ BASE }}">
+                            <img src="{{ BASE }}assets/img/banner-1.jpg" alt="Banner 1">
+                        </a>
+                    </div>
+                    <div class="col col-sm">
+                        <div class="social-icons text-end">
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#f"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                        <div class="search-box">
+                            <form method="post" action="{{ BASE }}search">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="q" class="form-control" placeholder="Kljucne reci pretrage">
+                                        <button type="submit" class="btn btn-primary  input-group-append"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid ">
+<!--                        <a class="navbar-brand" href="#">Halcyon</a>-->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <a class="nav-item nav-link active" href="{{ BASE }}">Pocetna</a>
+                                <a class="nav-item nav-link active" href="{{ BASE }}categories">Kategorije</a>
+                                <a class="nav-item nav-link active" href="{{ BASE }}contact">Kontakt</a>
+                                <a class="nav-item nav-link active" href="{{ BASE }}profile">Profil</a>
+                                <a class="nav-item nav-link active" href="{{ BASE }}log-out">Odjava</a>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <main>
+                {% block main %}
+                {% endblock %}
+            </main>
+
+            <div class="bookmarks">
+                Loading bookmarks...
+            </div>
+
+            <footer class="site-footer">
+                &copy: 2023 Luka Spasojevic SII 2019203323
+            </footer>
+        </div>
+
+        <script>const BASE = '{{ BASE }}';</script>
+        <script src="{{ BASE }}assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="{{ BASE }}assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="{{ BASE }}assets/js/bookmark.js"></script>
+    </body>
+</html>
