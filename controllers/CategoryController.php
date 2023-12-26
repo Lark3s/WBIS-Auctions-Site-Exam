@@ -4,6 +4,7 @@
     use App\Core\Controller;
     use App\Models\AuctionModel;
     use App\Models\CategoryModel;
+    use App\Models\OfferModel;
 
     class CategoryController extends Controller {
         public function show($id) {
@@ -19,6 +20,14 @@
 
             $auctionModel = new AuctionModel($this->getDatabaseConnection());
             $auctionsInCategory = $auctionModel->getAllByCategoryId($id);
+
+            $offerModel = new OfferModel($this->getDatabaseConnection());
+
+            array_map(function($auction) use ($offerModel){
+                $auction->last_offer_price = $offerModel->getLastOfferPrice($auction);
+                return $auction;
+            }, $auctionsInCategory);
+
             $this->set('auctionsInCategory', $auctionsInCategory);
         }
     }

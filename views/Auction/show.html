@@ -5,6 +5,7 @@
     <h1>{{ auction.title|escape }}</h1>
     <p>{{ auction.description|escape }}</p>
     <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>
+    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>
     <p>Datum pocetka aukcije: {{ auction.starts_at|date('j.n.Y.') }}</p>
     <p>Datum kraja aukcije: {{ auction.ends_at|date('j.n.Y.') }}</p>
 

@@ -18,10 +18,8 @@ class AuctionController extends Controller {
 
         $this->set('auction', $auction);
 
-        $lastOfferPrice = $this->getLastOfferPrice($id);
-        if (!$lastOfferPrice) {
-            $lastOfferPrice = $auction->starting_price;
-        }
+        $offerModel = new OfferModel($this->getDatabaseConnection());
+        $lastOfferPrice = $offerModel->getLastOfferPrice($auction);
         $this->set('lastOfferPrice', $lastOfferPrice);
 
         $auctionViewModel = new AuctionViewModel($this->getDatabaseConnection());
@@ -34,20 +32,6 @@ class AuctionController extends Controller {
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent
         ]);
-    }
-
-    private function getLastOfferPrice($auctionId) {
-        $offerModel = new OfferModel($this->getDatabaseConnection());
-        $offers = $offerModel->getAllByAuctionId($auctionId);
-        $lastPrice = 0;
-
-        foreach ($offers as $offer) {
-            if ($lastPrice < $offer->price) {
-                $lastPrice = $offer->price;
-            }
-        }
-
-        return $lastPrice;
     }
 
     private function normaliseKeywords(string $keywords): string {
