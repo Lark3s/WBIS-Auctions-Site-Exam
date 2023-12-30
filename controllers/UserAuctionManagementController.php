@@ -112,6 +112,8 @@
         }
 
         private function uploadImage(string $fieldName, string $fileName): bool {
+            unlink(\Configuration::UPLOAD_DIR . $fileName . '.jpg');
+
             $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
             $file = new \Upload\File($fieldName, $uploadPath);
             $file->setName($fileName);
