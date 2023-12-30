@@ -30,19 +30,10 @@
         public function postRegister() {
             $email      = filter_input(INPUT_POST, 'reg_email', FILTER_SANITIZE_EMAIL);
             $forename   = filter_input(INPUT_POST, 'reg_forename', FILTER_UNSAFE_RAW);    //TODO: Ovde isto ima par primeraka sa filter unsafe raw koje treba kasnije resiti nekako
-            $surname    = filter_input(INPUT_POST, 'reg_surname', FILTER_UNSAFE_RAW);      // unsafe raw
+            $surname    = filter_input(INPUT_POST, 'reg_surname', FILTER_UNSAFE_RAW);     // unsafe raw
             $username   = filter_input(INPUT_POST, 'reg_username', FILTER_UNSAFE_RAW);    // unsafe raw
-            $password1  = filter_input(INPUT_POST, 'reg_password_1', FILTER_UNSAFE_RAW); // unsafe raw
-            $password2  = filter_input(INPUT_POST, 'reg_password_2', FILTER_UNSAFE_RAW); // unsafe raw
-
-//            print_r([
-//                $email    ,
-//                $forename ,
-//                $surname  ,
-//                $username ,
-//                $password1,
-//                $password2
-//            ]);
+            $password1  = filter_input(INPUT_POST, 'reg_password_1', FILTER_UNSAFE_RAW);  // unsafe raw
+            $password2  = filter_input(INPUT_POST, 'reg_password_2', FILTER_UNSAFE_RAW);  // unsafe raw
 
             if ($password1 !== $password2) {
                 $this->set('message', 'Doslo je do greske: Niste uneli istu lozinku u oba polja!');
@@ -76,8 +67,8 @@
                 'username' => $username,
                 'password' => $passwordHash,
                 'address'  => 'B.B. N.G.',         //TODO: ovo mora da se resi kada budem menjao bazu
-                'phone'    => '0690000000',        //i ovo
-                'salt'     => 'idk'                //a i ovo
+                'phone'    => '0690000000',        // i ovo
+                'salt'     => 'idk'                // a i ovo
             ]);
 
             if (!$userId) {
@@ -94,7 +85,7 @@
 
         public function postLogin() {
             $username = filter_input(INPUT_POST, 'login_username', FILTER_UNSAFE_RAW); //TODO: I OVDE JE UNSAFE RAW
-            $password = filter_input(INPUT_POST, 'login_password', FILTER_UNSAFE_RAW); //takodje
+            $password = filter_input(INPUT_POST, 'login_password', FILTER_UNSAFE_RAW); // takodje
 
             if (!(new StringValidator())->setMinLength(7)->setMaxLength(120)->isValid($password)) {
                 $this->set('message', 'Doslo je do greske: Lozinka nije ispravnog formata!');
