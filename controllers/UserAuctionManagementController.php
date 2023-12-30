@@ -27,8 +27,8 @@
                 'title'          => filter_input(INPUT_POST, 'title', FILTER_UNSAFE_RAW), // TODO: I ovde je gomila unsafe raw filtera
                 'description'    => filter_input(INPUT_POST, 'description', FILTER_UNSAFE_RAW),
                 'starting_price' => sprintf("%.2f", filter_input(INPUT_POST, 'starting_price', FILTER_UNSAFE_RAW)),
-                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
-                'ends_at'        => filter_input(INPUT_POST, 'ends_at', FILTER_UNSAFE_RAW),
+//                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
+                'expires_at'        => filter_input(INPUT_POST, 'expires_at', FILTER_UNSAFE_RAW),
                 'category_id'    => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT),
                 'user_id'        => $this->getSession()->get('user_id')
             ];
@@ -39,6 +39,11 @@
 
             if (!$auctionId) {
                 $this->set('message', 'Nije uspesno dodata aukcija.');
+                return;
+            }
+
+            $uploadStatus = $this->uploadImage('image', $auctionId . '');
+            if (!$uploadStatus) {
                 return;
             }
 
@@ -59,10 +64,10 @@
                 return;
             }
 
-            $auction->starts_at = str_replace(' ', 'T', substr($auction->starts_at, 0, 16));
-            $auction->ends_at = str_replace(' ', 'T', substr($auction->ends_at, 0, 16));
+//            $auction->starts_at = str_replace(' ', 'T', substr($auction->starts_at, 0, 16));
+            $auction->expires_at = str_replace(' ', 'T', substr($auction->expires_at, 0, 16));
 
-            $this->set('auctions', $auction);
+            $this->set('auction', $auction);
 
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();
@@ -76,8 +81,8 @@
                 'title'          => filter_input(INPUT_POST, 'title', FILTER_UNSAFE_RAW), // TODO: A i ovde je gomila unsafe raw filtera
                 'description'    => filter_input(INPUT_POST, 'description', FILTER_UNSAFE_RAW),
                 'starting_price' => sprintf("%.2f", filter_input(INPUT_POST, 'starting_price', FILTER_UNSAFE_RAW)),
-                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
-                'ends_at'        => filter_input(INPUT_POST, 'ends_at', FILTER_UNSAFE_RAW),
+//                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
+                'expires_at'        => filter_input(INPUT_POST, 'expires_at', FILTER_UNSAFE_RAW),
                 'category_id'    => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT)
             ];
 
@@ -90,7 +95,30 @@
                 return;
             }
 
+            $uploadStatus = $this->uploadImage('image', $auctionId . '');
+            if (!$uploadStatus) {
+                return;
+            }
+
             $this->redirect( \Configuration::BASE . 'user/auctions' );
         }
 
+        private function uploadImage(string $fieldName, string $fileName): bool {
+            $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
+            $file = new \Upload\File($fieldName, $uploadPath);
+            $file->setName($fileName);
+            $file->addValidations([
+                new \Upload\Validation\Mimetype("image/jpeg"),
+                new \Upload\Validation\Size("3M"),
+                new \Upload\Validation\Dimensions(320, 240)
+            ]);
+
+            try {
+                $file->upload();
+                return true;
+            } catch (\Exception $e) {
+                $this->set('message', 'Greska: ' . implode(', ', $file->getErrors()));
+                return false;
+            }
+        }
     }

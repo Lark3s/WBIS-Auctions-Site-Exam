@@ -133,7 +133,7 @@
 
             $editList = [];
             $values = [];
-            foreach ( array_keys($data) as $fieldName => $value) {
+            foreach ( $data as $fieldName => $value) {
                 $editList[] = "{$fieldName} = ?";
                 $values[] = $value;
             }

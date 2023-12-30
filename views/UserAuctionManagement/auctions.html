@@ -8,7 +8,7 @@
 
     <div class="auctions">
         <ul>
-            {% for category in categories %}
+            {% for auction in auctions %}
             <li>
                 <a href="{{ BASE }}user/auctions/edit/{{ auction.auction_id }}">
                     {{ auction.title|escape }}

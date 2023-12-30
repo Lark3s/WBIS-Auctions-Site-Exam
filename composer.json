@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.8"
+        "twig/twig": "^3.8",
+        "codeguy/upload": "dev-master"
     },
     "autoload": {
         "psr-4": {
