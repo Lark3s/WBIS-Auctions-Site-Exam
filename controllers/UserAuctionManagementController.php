@@ -4,6 +4,7 @@
     use App\Core\Role\UserRoleController;
     use App\Models\AuctionModel;
     use App\Models\CategoryModel;
+    use App\Models\OfferModel;
 
     class UserAuctionManagementController extends UserRoleController {
 
@@ -61,6 +62,13 @@
 
             if ($auction->user_id != $this->getSession()->get('user_id')) {
                 $this->redirect(\Configuration::BASE . 'user/auctions');
+                return;
+            }
+
+            $offerModel = new OfferModel($this->getDatabaseConnection());
+            $offer = $offerModel->getAllByAuctionId($auctionId);
+            if (count($offer) > 0) {
+                $this->redirect( \Configuration::BASE . 'user/auctions' ); // TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
                 return;
             }
 
