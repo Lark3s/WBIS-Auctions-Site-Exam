@@ -1,0 +1,21 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<div>
+    <div class="options">
+        <a href="{{ BASE }}user/auctions/add">Add new auction</a>
+    </div>
+
+    <div class="auctions">
+        <ul>
+            {% for category in categories %}
+            <li>
+                <a href="{{ BASE }}user/auctions/edit/{{ auction.auction_id }}">
+                    {{ auction.title|escape }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

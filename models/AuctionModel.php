@@ -28,6 +28,10 @@
             return $this->getAllByFieldName('category_id', $categoryId);
         }
 
+        public function getAllByUserId(int $userId): array {
+            return $this->getAllByFieldName('user_id', $userId);
+        }
+
         public function getAllBySearch(string $keywords) {
             $sql = 'SELECT * FROM `auction` WHERE `title` LIKE ? OR `description` LIKE ?;';
 

@@ -1,0 +1,54 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<div class="row">
+    <div class="options">
+        <a href="{{ BASE }}user/auctions">List my auctions</a>
+    </div>
+
+    <form class="auction-form" method="POST">
+        <div class="mb-3">
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="title" required class="form-control" value="{{ auction.title }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="description">Description: </label>
+            <textarea id="description" name="description" required class="form-control" rows="10">{{ auction.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="starting_price">Starting price: </label>
+            <input type="number" id="starting_price" name="starting_price" required class="form-control" min="0.01" step="0.01" value="{{ auction.starting_price }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="starts_at">Starts at: </label>
+            <input type="datetime-local" id="starts_at" name="starts_at" required class="form-control" value="{{ auction.starts_at }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="ends_at">Ends at: </label>
+            <input type="datetime-local" id="ends_at" name="ends_at" required class="form-control" value="{{ auction.ends_at }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="category_id">Auctions category: </label>
+            <select class="form-control" name="category_id" id="category_id">
+                {% for category in categories %}
+                <option value="{{ category.category_id }}" {% if auction.category_id == category.category_id %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-pencil"></i>
+                Edit auction
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

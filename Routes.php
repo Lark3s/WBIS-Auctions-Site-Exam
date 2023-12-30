@@ -25,11 +25,18 @@ return [
 
     #User role routes:
     Route::get('|^user/profile/?$|',                   'UserDashboard',          'index'),
+
     Route::get('|^user/categories/?$|',                'UserCategoryManagement', 'categories'),
     Route::get('|^user/categories/edit/([0-9]+)/?$|',  'UserCategoryManagement', 'getEdit'),
     Route::post('|^user/categories/edit/([0-9]+)/?$|', 'UserCategoryManagement', 'postEdit'),
     Route::get('|^user/categories/add/?$|',            'UserCategoryManagement', 'getAdd'),
     Route::post('|^user/categories/add/?$|',           'UserCategoryManagement', 'postAdd'),
+
+    Route::get('|^user/auctions/?$|',                  'UserAuctionManagement',  'auctions'),
+    Route::get('|^user/auctions/edit/([0-9]+)/?$|',    'UserAuctionManagement',  'getEdit'),
+    Route::post('|^user/auctions/edit/([0-9]+)/?$|',   'UserAuctionManagement',  'postEdit'),
+    Route::get('|^user/auctions/add/?$|',              'UserAuctionManagement',  'getAdd'),
+    Route::post('|^user/auctions/add/?$|',             'UserAuctionManagement',  'postAdd'),
 
     #default
     Route::any('|^.*$|',                               'Main',                   'home')
