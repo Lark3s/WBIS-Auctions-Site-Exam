@@ -8,6 +8,7 @@ return [
     Route::post('|^user/register/?$|',                 'Main',                   'postRegister'),
     Route::get('|^user/login/?$|',                     'Main',                   'getLogin'),
     Route::post('|^user/login/?$|',                    'Main',                   'postLogin'),
+    Route::get('|^user/logout/?$|',                    'Main',                   'getLogout'),
 
     #category routes
     Route::get('|^category/([0-9]+)/?$|',              'Category',               'show'),

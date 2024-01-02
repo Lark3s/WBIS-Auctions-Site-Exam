@@ -110,4 +110,11 @@
 
             $this->redirect(\Configuration::BASE . 'user/profile');
         }
+
+        public function getLogout() {
+            $this->getSession()->remove('user_id');
+            $this->getSession()->save();
+
+            $this->redirect(\Configuration::BASE);
+        }
     }

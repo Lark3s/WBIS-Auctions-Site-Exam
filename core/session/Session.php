@@ -46,6 +46,12 @@
             return $this->sessionData->$key ?? $defaultValue;
         }
 
+        public function remove(string $key) {
+            if ($this->exists($key)) {
+                unset($this->sessionData->$key);
+            }
+        }
+
         public function clear() {
             $this->sessionData = (object) [];
         }
