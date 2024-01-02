@@ -9,12 +9,12 @@
     <form class="auction-form" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title">Title: </label>
-            <input type="text" id="title" name="title" required class="form-control" value="{{ auction.title }}">
+            <input type="text" id="title" name="title" required class="form-control" value="{{ auction.title }}" pattern=".*[^\s]{3,}.*">
         </div>
 
         <div class="mb-3">
             <label for="description">Description: </label>
-            <textarea id="description" name="description" required class="form-control" rows="10">{{ auction.description }}</textarea>
+            <textarea id="description" name="description" required class="form-control" rows="10">{{ auction.description }}</textarea> <!--TODO: Postoji JS plug in koji omogućava korišćenje pattern atributa za textarea ili možete sami definisati sa setCustomValidity i check Validity pomoću event handlera na event keyup npr. -->
         </div>
 
         <div class="mb-3">
