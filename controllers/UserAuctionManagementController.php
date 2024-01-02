@@ -103,9 +103,11 @@
                 return;
             }
 
-            $uploadStatus = $this->uploadImage('image', $auctionId . '');
-            if (!$uploadStatus) {
-                return;
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $uploadStatus = $this->uploadImage('image', $auctionId . '');
+                if (!$uploadStatus) {
+                    return;
+                }
             }
 
             $this->redirect( \Configuration::BASE . 'user/auctions' );
