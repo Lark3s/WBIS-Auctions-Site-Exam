@@ -14,8 +14,8 @@ class OfferModel extends Model {
             'offer_id' => new Field((new NumberValidator())->setIntegerLength(10), false),
             'created_at' => new Field((new DateTimeValidator())->allowDate()->allowTime(), false),
 
-            'user_id' => new Field((new NumberValidator())->setIntegerLength(10), false),
-            'auction_id' => new Field((new NumberValidator())->setIntegerLength(10), false),
+            'user_id' => new Field((new NumberValidator())->setIntegerLength(10), true),
+            'auction_id' => new Field((new NumberValidator())->setIntegerLength(10), true),
             'price' => new Field((new NumberValidator())->setDecimal()->setUnsigned()->setIntegerLength(7)->setMaxDecimalDigits(2))
         ];
     }

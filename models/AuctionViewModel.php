@@ -14,7 +14,7 @@
             return [
                 'auction_view_id' => new Field((new NumberValidator())->setIntegerLength(20), false),
                 'created_at'      => new Field((new DateTimeValidator())->allowDate()->allowTime(), false),
-                'auction_id'      => new Field((new NumberValidator())->setIntegerLength(11)),
+                'auction_id'      => new Field((new NumberValidator())->setIntegerLength(11), true),
                 'ip_address'      => new Field((new StringValidator())->setMaxLength(24)), // TODO: Napraviti IP address validator!!!!
                 'user_agent'      => new Field((new StringValidator())->setMaxLength(255))
             ];

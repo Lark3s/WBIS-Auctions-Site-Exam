@@ -4,10 +4,58 @@
     <a href="#" onclick="addBookmark({{ auction.auction_id }})">Add to bookmark</a>
     <h1>{{ auction.title|escape }}</h1>
     <p>{{ auction.description|escape }}</p>
-    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>
-    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>
-    <p>Datum pocetka aukcije: {{ auction.starts_at|date('j.n.Y.') }}</p>
-    <p>Datum kraja aukcije: {{ auction.ends_at|date('j.n.Y.') }}</p>
+<!--    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>-->
+<!--    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>-->
+    <p>Pocetna cena: <span id="current_auction_price">{{ lastOfferPrice }}</span> RSD
+        {% if showBidForm == true %}
+        <div class="form-group">
+            <input type="hidden" id="auction_id" value="{{ auction.auction_id }}">
+            <input type="number" min="{{ lastOfferPrice + 2.0 }}" step="0.01" value="{{ lastOfferPrice + 2.0 }}" id="offer_price" class="form-control">
+            <button type="button" onclick="auctionBid();" class="btn btn-primary">
+                <i class="fa fa-money"></i> Licitiraj
+            </button>
+        </div>
+        {% endif %}
+    </p>
+    <p>Datum pocetka aukcije: {{ auction.created_at|date('j.n.Y.') }}</p>
+    <p>Datum kraja aukcije: {{ auction.expires_at|date('j.n.Y.') }}</p>
+    <div id="message"></div>
+
+    <script>
+        function auctionBid() {
+            const auctionId = document.querySelector('#auction_id').value;
+            const offerPrice = document.querySelector('#offer_price').value;
+
+            addOffer(auctionId, offerPrice, updatePriceOnPage, showErrorMessage);
+        }
+
+        function updatePriceOnPage(newPrice) {
+            document.querySelector('#current_auction_price').innerHTML = newPrice;
+            showMessage('Nova ponuda je upsesno dodata');
+        }
+
+        function showErrorMessage(errorCode) {
+            switch (errorCode) {
+                case -10001 : showMessage('Niste prijavljeni!'); break;
+                case -10002 : showMessage('Ne mozete da licitirate na svojoj aukciji!'); break;
+                case -20001 : showMessage('Aukcija ne postoji!'); break;
+                case -20002 : showMessage('Aukcija nije aktivna!'); break;
+                case -20003 : showMessage('Aukcija se zavrsila!'); break;
+                case -20004 : showMessage('Aukcija nije pocela!'); break;
+                case -20005 : showMessage('Cena nije ispravna!'); break;
+                case -20006 : showMessage('Greska prilikom dodavanja ponude!'); break;
+                default: showMessage('Nepoznata greska!'); break;
+            }
+        }
+
+        function showMessage(message) {
+            document.querySelector('#message').innerHTML = message;
+
+            setTimeout(function () {
+                document.querySelector('#message').innerHTML = '';
+            }, 5000);
+        }
+    </script>
 
 {% endblock %}
 

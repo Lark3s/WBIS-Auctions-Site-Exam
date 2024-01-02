@@ -43,7 +43,7 @@
             }
 
             $res = $prep->execute([$keywords, $keywords]);
-            if (!$prep) {
+            if (!$res) {
                 return [];
             }
 

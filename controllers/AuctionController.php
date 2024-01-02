@@ -32,6 +32,19 @@ class AuctionController extends Controller {
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent
         ]);
+
+        $this->set('showBidForm', true);
+
+        if ($this->getSession()->get('user_id') === null) {
+            $this->set('showBidForm', false);
+        }
+
+        $auctionEndsAtTimestamp = strtotime($auction->expires_at);
+        $currentTimestamp = time();
+
+        if ($currentTimestamp > $auctionEndsAtTimestamp) {
+            $this->set('showBidForm', false);
+        }
     }
 
     private function normaliseKeywords(string $keywords): string {

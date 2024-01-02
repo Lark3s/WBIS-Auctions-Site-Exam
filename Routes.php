@@ -23,6 +23,9 @@ return [
     Route::get('|^api/bookmarks/add/([0-9]+)/?$|',     'ApiBookmark',            'addBookmark'),
     Route::get('|^api/bookmarks/clear/?$|',            'ApiBookmark',            'clear'),
 
+    #User API routes
+    Route::post('|^api/offer/make/?$|',                'ApiUserOffer',           'postMakeOffer'),
+
     #User role routes:
     Route::get('|^user/profile/?$|',                   'UserDashboard',          'index'),
 
