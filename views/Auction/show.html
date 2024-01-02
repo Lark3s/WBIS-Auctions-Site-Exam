@@ -21,6 +21,7 @@
     <p>Datum kraja aukcije: {{ auction.expires_at|date('j.n.Y.') }}</p>
     <div id="message"></div>
 
+    <!--TODO: resiti ovaj script tag da ne stoji ovako -->
     <script>
         function auctionBid() {
             const auctionId = document.querySelector('#auction_id').value;

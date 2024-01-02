@@ -29,7 +29,7 @@
                 'description'    => filter_input(INPUT_POST, 'description', FILTER_UNSAFE_RAW),
                 'starting_price' => sprintf("%.2f", filter_input(INPUT_POST, 'starting_price', FILTER_UNSAFE_RAW)),
 //                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
-                'expires_at'        => filter_input(INPUT_POST, 'expires_at', FILTER_UNSAFE_RAW),
+                'expires_at'     => filter_input(INPUT_POST, 'expires_at', FILTER_UNSAFE_RAW),
                 'category_id'    => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT),
                 'user_id'        => $this->getSession()->get('user_id')
             ];
@@ -113,20 +113,32 @@
             $this->redirect( \Configuration::BASE . 'user/auctions' );
         }
 
+        //file name is the same as auction_id
         private function uploadImage(string $fieldName, string $fileName): bool {
-            unlink(\Configuration::UPLOAD_DIR . $fileName . '.jpg');
+            $auctionModel = new AuctionModel($this->getDatabaseConnection());
+            $auction = $auctionModel->getById(intval($fileName));
+
+            unlink(\Configuration::UPLOAD_DIR . $auction->image_path);
 
             $uploadPath = new \Upload\Storage\FileSystem(\Configuration::UPLOAD_DIR);
             $file = new \Upload\File($fieldName, $uploadPath);
             $file->setName($fileName);
             $file->addValidations([
-                new \Upload\Validation\Mimetype("image/jpeg"),
+                new \Upload\Validation\Mimetype(["image/jpeg", "image/png"]),
                 new \Upload\Validation\Size("3M"),
-                new \Upload\Validation\Dimensions(320, 240)
+//                new \Upload\Validation\Dimensions(320, 240)
             ]);
 
             try {
                 $file->upload();
+
+                $fullFileName = $file->getNameWithExtension();
+
+                $auctionModel->editById(intval($fileName), [
+                    'image_path' => $fullFileName
+                ]);
+
+                //TODO: ovde treba da se radi resize
                 return true;
             } catch (\Exception $e) {
                 $this->set('message', 'Greska: ' . implode(', ', $file->getErrors()));
