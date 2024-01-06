@@ -18,6 +18,9 @@ return [
     Route::get('|^auction/([0-9]+)/?$|',               'Auction',                'show'),
     Route::post('|^search/?$|',                        'Auction',                'postSearch'),
 
+    #EventHandler routes
+    Route::get('|^handle/([a-z]+)/?$|',                'EventHandler',           'handle'),
+
     #API routes:
     Route::get('|^api/auction/([0-9]+)/?$|',           'ApiAuction',             'show'),
     Route::get('|^api/bookmarks/?$|',                  'ApiBookmark',            'getBookmarks'),

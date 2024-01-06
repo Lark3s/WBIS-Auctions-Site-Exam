@@ -2,7 +2,9 @@
     namespace App\Controllers;
 
     use App\Core\UserApiController;
+    use App\EventHandlers\EmailEventHandler;
     use App\Models\AuctionModel;
+    use App\Models\EventModel;
     use App\Models\OfferModel;
     use App\Models\UserModel;
     use PHPMailer\PHPMailer\PHPMailer;
@@ -98,21 +100,17 @@
             $html .= '</body></html>';
 
             //TODO: trebao bi da se napravi helper za slanje mejlova, ako to ostane kao funkcionalnost u kranjoj verziji, factory/builder ili singleton pattern
-            $mailer = new PHPMailer();
-            $mailer->isSMTP();
-            $mailer->Host = \Configuration::MAIL_HOST;
-            $mailer->Port = \Configuration::MAIL_PORT;
-            $mailer->SMTPSecure = \Configuration::MAIL_PROTOCOL;
-            $mailer->SMTPAuth = true;
-            $mailer->Username = \Configuration::MAIL_USERNAME;
-            $mailer->Password = \Configuration::MAIL_PASSWORD;
-            $mailer->setFrom(\Configuration::MAIL_USERNAME);
-            $mailer->isHTML(true);
+            // ^- ovo je donekle reseno
 
-            $mailer->Body = $html;
-            $mailer->Subject = 'Nova licitacija';
-            $mailer->addAddress($user->email);
+            $event = new EmailEventHandler();
+            $event->setSubject('Nova licitacija');
+            $event->setBody($html);
+            $event->addAddress($user->email);
 
-            $mailer->send();
+            $eventModel = new EventModel($this->getDatabaseConnection());
+            $eventModel->add([
+                'type' => 'email',
+                'data' => $event->getData()
+            ]);
         }
     }
