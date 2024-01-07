@@ -27,11 +27,15 @@ return [
     Route::get('|^api/bookmarks/add/([0-9]+)/?$|',     'ApiBookmark',            'addBookmark'),
     Route::get('|^api/bookmarks/clear/?$|',            'ApiBookmark',            'clear'),
 
+    #Admin API routes - admin user not implemented
+    Route::post('|^api/charts/year/?$|',               'ApiChart',               'chartByYears'),
+
     #User API routes
     Route::post('|^api/offer/make/?$|',                'ApiUserOffer',           'postMakeOffer'),
 
     #User role routes:
     Route::get('|^user/profile/?$|',                   'UserDashboard',          'index'),
+    Route::get('|^user/profile/analytics/?$|',         'UserDashboard',          'analytics'),
 
     Route::get('|^user/categories/?$|',                'UserCategoryManagement', 'categories'),
     Route::get('|^user/categories/edit/([0-9]+)/?$|',  'UserCategoryManagement', 'getEdit'),
@@ -46,5 +50,8 @@ return [
     Route::post('|^user/auctions/add/?$|',             'UserAuctionManagement',  'postAdd'),
 
     #default
-    Route::any('|^.*$|',                               'Main',                   'home')
+    Route::any('|^.*?$|',                               'Main',                   'home'),
+
+    #404-not-found
+//    Route::any('|^.*$|',                               'Main',                   'notFound')
 ];

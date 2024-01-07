@@ -52,7 +52,7 @@
                                 <a class="nav-item nav-link active" href="{{ BASE }}">Pocetna</a>
                                 <a class="nav-item nav-link active" href="{{ BASE }}categories">Kategorije</a>
                                 <a class="nav-item nav-link active" href="{{ BASE }}contact">Kontakt</a>
-                                <a class="nav-item nav-link active" href="{{ BASE }}profile">Profil</a>
+                                <a class="nav-item nav-link active" href="{{ BASE }}user/profile">Profil</a>
                                 <a class="nav-item nav-link active" href="{{ BASE }}user/logout">Odjava</a>
                             </ul>
                         </div>
@@ -63,6 +63,7 @@
                 {% block main %}
                 {% endblock %}
             </main>
+
             <div class="card my-2">
                 <div class="bookmarks card-body">
                     Loading bookmarks...
@@ -76,7 +77,9 @@
         <script>const BASE = '{{ BASE }}';</script>
         <script src="{{ BASE }}assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="{{ BASE }}assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="{{ BASE }}assets/libs/chart.js/dist/chart.umd.js"></script>
         <script src="{{ BASE }}assets/js/bookmark.js"></script>
         <script src="{{ BASE }}assets/js/offer.js"></script>
+
     </body>
 </html>

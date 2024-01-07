@@ -1,0 +1,10 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+<button onclick="getByYear()">Get users by year</button>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="{{ BASE }}assets/js/chartData.js" defer></script>
+{% endblock %}

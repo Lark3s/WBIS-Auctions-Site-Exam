@@ -8,4 +8,8 @@
         public function index() {
             # ...
         }
+
+        public function analytics() {
+
+        }
     }
