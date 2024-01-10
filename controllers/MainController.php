@@ -6,6 +6,7 @@
     use App\Models\AuctionModel;
     use App\Models\AuctionViewModel;
     use App\Models\CategoryModel;
+    use App\models\RoleModel;
     use App\Models\UserModel;
     use App\Validators\StringValidator;
 
@@ -15,12 +16,6 @@
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();
             $this->set('categories', $categories);
-
-//            $staraVrednost = $this->getSession()->get('brojac', 0);
-//            $novaVrednost = $staraVrednost + 1;
-//            $this->getSession()->put('brojac', $novaVrednost);
-//
-//            $this->set('podatak', $novaVrednost);
         }
 
         public function getRegister() {
@@ -105,7 +100,15 @@
                 return;
             }
 
+            $roleModel = new RoleModel($this->getDatabaseConnection());
+            $role = $roleModel->getById($user->role_id);
+            if (!$role) {
+                $this->set('message', 'Doslo je do greske: Nepostjeca uloga!');
+                return;
+            }
+
             $this->getSession()->put('user_id', $user->user_id);
+            $this->getSession()->put('role', $role->name);
             $this->getSession()->save();
 
             $this->redirect(\Configuration::BASE . 'user/profile');
@@ -113,6 +116,7 @@
 
         public function getLogout() {
             $this->getSession()->remove('user_id');
+            $this->getSession()->remove('role');
             $this->getSession()->save();
 
             $this->redirect(\Configuration::BASE);

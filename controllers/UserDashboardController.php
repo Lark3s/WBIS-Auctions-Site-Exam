@@ -10,6 +10,6 @@
         }
 
         public function analytics() {
-
+            # ...
         }
     }
