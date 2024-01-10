@@ -23,7 +23,8 @@
                 'username'   => new Field((new StringValidator())->setMaxLength(64)),
                 'password'   => new Field((new StringValidator())->setMaxLength(128)),
                 'salt'       => new Field((new StringValidator())->setMaxLength(64*1024)),
-                'is_active'  => new Field(new BitValidator())
+                'is_active'  => new Field(new BitValidator()),
+                'role_id'    => new Field((new NumberValidator())->setIntegerLength(10))
             ];
         }
         public function getByUsername(int $username) {
