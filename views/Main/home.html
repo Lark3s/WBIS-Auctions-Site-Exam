@@ -3,15 +3,18 @@
 {% block main %}
 {% apply spaceless %}
 <p>{{ podatak }}</p>
-<div class="row">
-    {% for category in categories %}
-    <div class="card col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 text-center category">
-        <div class="card-body">
-            <a href="{{ BASE }}category/{{ category.category_id }}" class="card-title">{{ category.name|escape }}</a>
-        </div>
-    </div>
-    {% endfor %}
+<div class="text-center">
+    <h1>Hello! Welcome!</h1>
 </div>
+<!--<div class="row">-->
+<!--    {% for category in categories %}-->
+<!--    <div class="card col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 text-center category">-->
+<!--        <div class="card-body">-->
+<!--            <a href="{{ BASE }}category/{{ category.category_id }}" class="card-title">{{ category.name|escape }}</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--</div>-->
 
 <!--<p>Trenutno vreme je: {{ "now"|date('d.m.Y. H.i', timezone="Europe/Belgrade") }}</p>-->
 

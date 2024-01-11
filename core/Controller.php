@@ -9,7 +9,7 @@
         private $data = [];
 
         public function __pre() {
-
+            $this->checkLogin();
         }
 
         final public function __construct(DatabaseConnection &$dbc){
@@ -47,5 +47,13 @@
             ob_clean();
             header('Location: ' . $path, true, $code);
             exit;
+        }
+
+        protected function checkLogin() {
+            if ($this->getSession()->get('user_id') === null) {
+                $this->set('isLoggedIn', false);
+            } else {
+                $this->set('isLoggedIn', true);
+            }
         }
     }

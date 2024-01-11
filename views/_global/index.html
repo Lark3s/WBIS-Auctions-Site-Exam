@@ -51,9 +51,13 @@
                             <ul class="navbar-nav">
                                 <a class="nav-item nav-link active" href="{{ BASE }}">Pocetna</a>
                                 <a class="nav-item nav-link active" href="{{ BASE }}categories">Kategorije</a>
-<!--                                <a class="nav-item nav-link active" href="{{ BASE }}contact">Kontakt</a>-->
+                                {% if isLoggedIn == false %}
+                                <a class="nav-item nav-link active" href="{{ BASE }}user/login">Login</a>
+                                {% endif %}
+                                {% if isLoggedIn == true %}
                                 <a class="nav-item nav-link active" href="{{ BASE }}user/profile">Profil</a>
                                 <a class="nav-item nav-link active" href="{{ BASE }}user/logout">Odjava</a>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

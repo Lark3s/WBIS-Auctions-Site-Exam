@@ -11,6 +11,7 @@ return [
     Route::get('|^user/logout/?$|',                    'Main',                   'getLogout'),
 
     #category routes
+    Route::get('|^categories/?$|',                     'Categories',             'show'),
     Route::get('|^category/([0-9]+)/?$|',              'Category',               'show'),
     Route::get('|^category/([0-9]+)/delete/?$|',       'Category',               'delete'),
 
