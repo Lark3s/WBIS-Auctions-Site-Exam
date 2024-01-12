@@ -6,17 +6,46 @@
     use App\Models\UserModel;
 
     class ApiChartController extends ApiController {
-        public function chartByYears() {
+        public function chartByTime() {
             $chartModel = new ChartModel($this->getDatabaseConnection());
 
-            $q = filter_input(INPUT_POST, 'user', FILTER_UNSAFE_RAW); //TODO: takodje unsafe raw
+            $table = filter_input(INPUT_POST, 'table', FILTER_UNSAFE_RAW); //TODO: takodje unsafe raw
+            $dimension = filter_input(INPUT_POST, 'dimension', FILTER_UNSAFE_RAW);
 
-            $tableName = $this->normaliseKeywords($q);
+            $tableName = $this->normaliseKeywords($table);
+            $dimensionName = $this->normaliseKeywords($dimension);
 
-            $chartData = $chartModel->countAllByYears($tableName);
+            switch ($dimensionName) {
+                case 'year':
+                    $chartData = $chartModel->countAllByYears($tableName);
+                    $label = '# of entries for ' . $tableName . ' by years';
+                    break;
+                case 'quarter':
+                    $chartData = $chartModel->countAllByQuarter($tableName);
+                    $label = '# of entries for ' . $tableName . ' by quarters';
+                    break;
+                case 'month':
+                    $chartData = $chartModel->countAllByMonth($tableName);
+                    $label = '# of entries for ' . $tableName . ' by month';
+                    break;
+                case 'week':
+                    $chartData = $chartModel->countAllByWeek($tableName);
+                    $label = '# of entries for ' . $tableName . ' by week';
+                    break;
+                default:
+                    $chartData = null;
+                    $label = 'error';
+            }
 
+//            $chartData = $chartModel->countAllByYears($tableName);
+//            $chartData = $chartModel->countAllByDimension($tableName, $dimension);
+
+            $this->set('type', $dimensionName);
+            $this->set('label', $label);
             $this->set('data', $chartData);
         }
+
+
 
         private function normaliseKeywords(string $keywords): string {
             $keywords = trim($keywords);

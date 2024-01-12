@@ -14,6 +14,11 @@
 }
 
 .width-100-percent { width: 100%; }
+
+.chartDiv {
+    height: 60vh;
+    width: 60vw;
+}
 /** {*/
 /*    box-sizing: border-box;*/
 /*    padding: 0px;*/

@@ -28,8 +28,8 @@ return [
     Route::get('|^api/bookmarks/add/([0-9]+)/?$|',     'ApiBookmark',            'addBookmark'),
     Route::get('|^api/bookmarks/clear/?$|',            'ApiBookmark',            'clear'),
 
-    #Admin API routes - admin user not implemented
-    Route::post('|^api/charts/year/?$|',               'ApiChart',               'chartByYears'),
+    #Admin API routes
+    Route::post('|^api/charts/time/?$|',               'ApiChart',               'chartByTime'),
 
     #User API routes
     Route::post('|^api/offer/make/?$|',                'ApiUserOffer',           'postMakeOffer'),

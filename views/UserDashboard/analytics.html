@@ -2,12 +2,29 @@
 
 {% block main %}
 {% if isAdmin == true %}
-    <button onclick="getByYear()">Get users by year</button>
-    <div>
+<div>
+        <label for="table">Choose a table:</label>
+        <select id="table">
+            <option value="user">User</option>
+            <option value="auction">Auction</option>
+        </select>
+
+        <label for="time">Choose a table:</label>
+        <select id="time">
+            <option value="year">Year</option>
+            <option value="quarter">Quarter</option>
+            <option value="month">Month</option>
+            <option value="week">Week</option>
+        </select>
+
+        <button onclick="getByTime()">Make chart</button>
+
+    <div class="mx-auto p-2 chartDiv">
         <canvas id="myChart"></canvas>
     </div>
+</div>
 {% endif %}
-    <p>{{ message|escape }}</p>
+    <p id="message" >{{ message|escape }}</p>
 
     <script src="{{ BASE }}assets/js/chartData.js" defer></script>
 {% endblock %}
