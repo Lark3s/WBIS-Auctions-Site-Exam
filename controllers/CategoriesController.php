@@ -10,5 +10,8 @@
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();
             $this->set('categories', $categories);
+
+//            print_r($id);
+
         }
     }

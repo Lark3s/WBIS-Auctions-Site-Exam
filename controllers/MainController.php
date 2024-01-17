@@ -121,4 +121,8 @@
 
             $this->redirect(\Configuration::BASE);
         }
+
+        public function notFound() {
+            # ...
+        }
     }
