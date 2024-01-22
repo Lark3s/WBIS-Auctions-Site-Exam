@@ -9,7 +9,11 @@
             $this->authorize();
         }
 
-        public function analytics() {
+        public function graphs() {
+            $this->authorize();
+        }
+
+        public function tables() {
             $this->authorize();
         }
 

@@ -36,7 +36,8 @@ return [
 
     #User role routes:
     Route::get('|^user/profile/?$|',                    'UserDashboard',          'index'),
-    Route::get('|^user/profile/analytics/?$|',          'UserDashboard',          'analytics'),
+    Route::get('|^user/profile/analytics/graphs/?$|',   'UserDashboard',          'graphs'),
+    Route::get('|^user/profile/analytics/tables/?$|',   'UserDashboard',          'tables'),
 
     Route::get('|^user/categories/?$|',                 'UserCategoryManagement', 'categories'),
     Route::get('|^user/categories/edit/([0-9]+)/?$|',   'UserCategoryManagement', 'getEdit'),

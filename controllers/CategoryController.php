@@ -29,7 +29,12 @@
 //            $auctionsInCategory = $auctionModel->getAllByCategoryId($id); //ovo je staro, gde samo uzme po id
 
             $auctionsInCategory = $auctionModel->getByPageAndTableAndId('category', $id, $pageNumber, $itemsPerPage);
-            $totalPages = $auctionModel->getTotalPagesByTableAndId('category', $id, $pageNumber, $itemsPerPage);
+            $totalPages = $auctionModel->getTotalPagesByTableAndId('category', $id, $itemsPerPage);
+
+            if ($pageNumber > $totalPages) {
+                header('Location: /404');
+                exit;
+            }
 
             $offerModel = new OfferModel($this->getDatabaseConnection());
 
@@ -42,7 +47,8 @@
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $pageNumber);
 
-//            var_dump($pageNumber);
+//            var_dump($totalPages);
+//            exit;
 //            var_dump($categoryName);
 //            var_dump($auctionModel->getTotalPagesByTableAndId('category', $id, $itemsPerPage));
         }

@@ -3,10 +3,16 @@
 {% block main %}
 {% if isAdmin == true %}
     <div>
-        <a href="{{ BASE }}user/profile/analytics">
-            <i class="fa fa-chart-simple"></i>Analytics
+        <a href="{{ BASE }}user/profile/analytics/graphs">
+            <i class="fa fa-chart-simple"></i>Graphs
         </a>
     </div>
+    <div>
+        <a href="{{ BASE }}user/profile/analytics/tables">
+            <i class="fa fa-table-list"></i>Tables
+        </a>
+    </div>
+
 {% endif %}
     <div>
         <a href="{{ BASE }}user/auctions">

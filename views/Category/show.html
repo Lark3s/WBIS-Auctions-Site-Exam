@@ -1,7 +1,8 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-
+<div>
+    <h2 class="text-center border-bottom border-1 p-4">{{ category.name|escape}}</h2>
     <ul>
         {% for auction in auctionsInCategory %}
         <li class="auction row mb-3">
@@ -25,6 +26,31 @@
         </li>
         {% endfor %}
     </ul>
+
+<!--    <div class="">-->
+        <nav aria-label="Page navigation example" class="width-100-percent d-flex">
+            <ul class="pagination mx-auto  justify-content-between">
+                <li class="page-item"><a class="page-link first" onclick="first()" href="#">First</a></li>
+                <li class="page-item"><a class="page-link prev" onclick="prev()" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+                <li class="page-item"><a class="page-link next" onclick="next()" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link last" onclick="last()" href="#">Last({{ totalPages }})</a></li>
+            </ul>
+<!--            <div class="input-group col-1">-->
+                <label for="page-number" class="p-2">Jump to page:</label>
+                <input class="" id="page-number" type="number" value="{{ currentPage }}" min="1" max="{{ totalPages }}">
+                <button type="button" onclick="jumpToPage()" class="btn btn-primary input-group-append jump fa-solid fa-arrow-right fa-2"></button>
+<!--            </div>-->
+
+        </nav>
+<!--    </div>-->
+</div>
+
+
+    <script src="{{ BASE }}assets/js/categoryPagination.js" defer></script>
+    <script defer> const CATEGORY = {{ category.category_id }}</script>
+    <script defer> const TOTAL = {{ totalPages }}</script>
+    <script defer> const CURRENT = {{ currentPage }}</script>
 {% endblock %}
 
 {% block naslov %}

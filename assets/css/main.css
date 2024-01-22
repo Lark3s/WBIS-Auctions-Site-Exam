@@ -26,3 +26,13 @@
 #hello {
 
 }
+#page-number {
+    width: 50px;
+    height: 40px;
+}
+
+.jump {
+    height: 40px;
+    width: 40px;
+    /*font-size: 16pt;*/
+}
