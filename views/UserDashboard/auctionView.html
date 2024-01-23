@@ -64,10 +64,11 @@
 <p id="message" >{{ message|escape }}</p>
 
 <script src="{{ BASE }}assets/js/tablePagination.js" defer></script>
-<script> const TABLE = 'auctionView' </script>
-<script> const TOTAL = {{ totalPages }} </script>
-<script> const CURRENT = {{ currentPage }} </script>
-<script> const FILTER = {{ filter }} </script>
-<script> const ORDER = {{ order }} </script>
-<script> const SORT = {{ sort }} </script>
+<script src="{{ BASE }}assets/js/tableOrdering.js" defer></script>
+<script defer> const TABLE = 'auctionView' </script>
+<script defer> const TOTAL = {{ totalPages }} </script>
+<script defer> const CURRENT = {{ currentPage }} </script>
+<script defer> const FILTER = {{ filter }} </script>
+<script defer> const ORDER = '{{ order }}' </script>
+<script defer> const SORT = '{{ sort }}'  </script>
 {% endblock %}

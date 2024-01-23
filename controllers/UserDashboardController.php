@@ -40,6 +40,8 @@
             $this->set('users', $users);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
+
+
         }
 
         public function auction($page) {
@@ -72,7 +74,12 @@
 
             $itemsPerPage = 15;
 
-            $auctionViews = $auctionViewModel->getByPageAndTable($page, $itemsPerPage);
+            $orderingAndSorting = $this->getOrderingAndSorting($_GET["URL"]);
+            $orderBy = $orderingAndSorting[1];
+            $sortBy = $orderingAndSorting[0];
+
+            $auctionViews = $auctionViewModel->getByPageAndTableAndSortAndOrder($page, $itemsPerPage, $orderBy, $sortBy);
+//            $auctionViews = $auctionViewModel->getByPageAndTable($page, $itemsPerPage);
             $totalPages = $auctionViewModel->getTotalPagesByTable($itemsPerPage);
 
             if ($page > $totalPages) {
@@ -83,6 +90,9 @@
             $this->set('auctionViews', $auctionViews);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
+            $this->set('sort', $sortBy);
+            $this->set('order', $orderBy);
+
         }
 
         public function offer($page) {
@@ -103,6 +113,17 @@
             $this->set('offers', $offers);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
+        }
+
+        function getOrderingAndSorting($url) {
+            $urlComponents = parse_url($url);
+            $result = null;
+            if (isset($urlComponents['path'])) {
+                $pathParts = explode('/', trim($urlComponents['path'], '/'));
+                $result[0] = array_slice($pathParts, -1)[0];
+                $result[1] = array_slice($pathParts, -2)[0];
+            }
+            return $result;
         }
 
         public function authorize() {

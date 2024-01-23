@@ -112,6 +112,19 @@
             return $items;
         }
 
+        public function getByPageAndTableAndSortAndOrder($page, $itemsPerPage, $order, $sort) {
+                    $tableName = $this->getTableName();
+                    $offset = ($page - 1) * $itemsPerPage;
+                    $sql = 'SELECT * FROM `' . $tableName . '` ORDER BY `' . $order . '` ' . strtoupper($sort) . ' LIMIT '. $offset.', '.$itemsPerPage.';';
+                    $prep = $this->dbc->getConnection()->prepare($sql);
+                    $res = $prep->execute();
+                    $items = [];
+                    if ($res) {
+                        $items = $prep->fetchAll(\PDO::FETCH_OBJ);
+                    }
+                    return $items;
+                }
+
         public function getTotalPagesByTableAndId($requiredParam, $id, $itemsPerPage) {
             $tableName = $this->getTableName();
             $sql = 'SELECT COUNT(*) as total FROM `'.$tableName.'` WHERE `' . $requiredParam . '_id` = '. $id .';'; //trebalo bi da je sad dobro

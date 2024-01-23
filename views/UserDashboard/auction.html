@@ -82,10 +82,11 @@
 <p id="message" >{{ message|escape }}</p>
 
 <script src="{{ BASE }}assets/js/tablePagination.js" defer></script>
+<script src="{{ BASE }}assets/js/tableOrdering.js" defer></script>
 <script> const TABLE = 'auction' </script>
 <script> const TOTAL = {{ totalPages }} </script>
 <script> const CURRENT = {{ currentPage }} </script>
-<!--<script> const FILTER = {{ filter }} </script>-->
-<!--<script> const ORDER = {{ order }} </script>-->
-<!--<script> const SORT = {{ sort }} </script>-->
+<script> const FILTER = {{ filter }} </script>
+<script> const ORDER = '{{ order }}' </script>
+<script> const SORT = '{{ sort }}'  </script>
 {% endblock %}
