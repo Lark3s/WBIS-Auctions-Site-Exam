@@ -99,6 +99,19 @@
             return $items;
         }
 
+        public function getByPageAndTable($page, $itemsPerPage) {
+            $tableName = $this->getTableName();
+            $offset = ($page - 1) * $itemsPerPage;
+            $sql = 'SELECT * FROM `' . $tableName . '` LIMIT '. $offset.', '.$itemsPerPage.';';
+            $prep = $this->dbc->getConnection()->prepare($sql);
+            $res = $prep->execute();
+            $items = [];
+            if ($res) {
+                $items = $prep->fetchAll(\PDO::FETCH_OBJ);
+            }
+            return $items;
+        }
+
         public function getTotalPagesByTableAndId($requiredParam, $id, $itemsPerPage) {
             $tableName = $this->getTableName();
             $sql = 'SELECT COUNT(*) as total FROM `'.$tableName.'` WHERE `' . $requiredParam . '_id` = '. $id .';'; //trebalo bi da je sad dobro
@@ -111,6 +124,32 @@
                 $totalPages = ceil($totalItems / $itemsPerPage);
             }
             return $totalPages;
+        }
+
+        public function getTotalPagesByTable($itemsPerPage) {
+            $tableName = $this->getTableName();
+            $sql = 'SELECT COUNT(*) as total FROM `'.$tableName.'`;'; //trebalo bi da je sad dobro
+            $prep = $this->dbc->getConnection()->prepare($sql);
+            $res = $prep->execute();
+            $totalPages = null;
+            if ($res) {
+                $totalItems = $prep->fetchColumn();
+
+                $totalPages = ceil($totalItems / $itemsPerPage);
+            }
+            return $totalPages;
+        }
+
+        public function getTableFields() {
+            $tableName = $this->getTableName();
+            $sql = 'DESCRIBE ' . $tableName . ';';
+            $prep = $this->dbc->getConnection()->prepare($sql);
+            $res = $prep->execute();
+            $fieldNames = null;
+            if ($res) {
+                $fieldNames = $prep->fetchAll(\PDO::FETCH_COLUMN);
+            }
+            return $fieldNames;
         }
 
         private function checkFieldList(array $data): void

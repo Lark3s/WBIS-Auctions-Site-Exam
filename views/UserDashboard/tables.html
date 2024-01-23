@@ -1,22 +1,27 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
+{% if isAdmin == true %}
     <div>
-        <table>
-            <tr>
-                //for each
-                <th></th>
-
-            </tr>
-
-            //for each
-            <tr>
-                <td></td>
-            </tr>
-
-        </table>
+        <a href="{{ BASE }}user/profile/analytics/tables/user/page/1">
+            User
+        </a>
     </div>
-//script tag with js
-//footer with pages
-
+    <div>
+        <a href="{{ BASE }}user/profile/analytics/tables/offer/page/1">
+            Offer
+        </a>
+    </div>
+    <div>
+        <a href="{{ BASE }}user/profile/analytics/tables/auction/page/1">
+            Auction
+        </a>
+    </div>
+    <div>
+        <a href="{{ BASE }}user/profile/analytics/tables/auctionView/page/1">
+            Auction View
+        </a>
+    </div>
+{% endif %}
+    <p id="message" >{{ message|escape }}</p>
 {% endblock %}

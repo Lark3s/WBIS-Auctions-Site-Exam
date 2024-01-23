@@ -1,0 +1,75 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% if isAdmin == true %}
+<div>
+    <p><a href="{{BASE}}user/profile/analytics/tables">Go back to table selection</a></p>
+</div>
+<div class="pb-2">
+    <p>Choose how you want to sort the data: </p>
+    <label for="field">Choose ordering:</label>
+    <select id="field">
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+    </select>
+
+    <label for="order">Choose a field to order by:</label>
+    <select id="order">
+        <option value="offer_id">offer_id</option>
+        <option value="created_at">created_at</option>
+        <option value="user_id">user_id</option>
+        <option value="auction_id">auction_id</option>
+        <option value="price">price</option>
+    </select>
+
+    <button class="btn btn-primary" onclick="sort()">Sort</button>
+</div>
+<table>
+    <tr>
+        <th>offer_id</th>
+        <th>created_at</th>
+        <th>user_id</th>
+        <th>auction_id</th>
+        <th>price</th>
+        <th>actions</th>
+    </tr>
+    {% for offer in offers %}
+    <tr>
+        <td>{{offer.offer_id}}</td>
+        <td>{{offer.created_at}}</td>
+        <td>{{offer.user_id}}</td>
+        <td>{{offer.auction_id}}</td>
+        <td>{{offer.price}}</td>
+
+        <td><a href="{{ BASE }}user/profile/delete/{{offer.offer_id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<nav aria-label="Page navigation example" class="width-100-percent d-flex">
+    <ul class="pagination mx-auto  justify-content-between">
+        <li class="page-item"><a class="page-link first" onclick="first()" href="#">First</a></li>
+        <li class="page-item"><a class="page-link prev" onclick="prev()" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+        <li class="page-item"><a class="page-link next" onclick="next()" href="#">Next</a></li>
+        <li class="page-item"><a class="page-link last" onclick="last()" href="#">Last({{ totalPages }})</a></li>
+    </ul>
+    <!--            <div class="input-group col-1">-->
+    <label for="page-number" class="p-2">Jump to page:</label>
+    <input class="" id="page-number" type="number" value="{{ currentPage }}" min="1" max="{{ totalPages }}">
+    <button type="button" onclick="jumpToPage()" class="btn btn-primary input-group-append jump fa-solid fa-arrow-right fa-2"></button>
+    <!--            </div>-->
+
+</nav>
+{% endif %}
+<p id="message" >{{ message|escape }}</p>
+
+<script src="{{ BASE }}assets/js/tablePagination.js" defer></script>
+<script src="{{ BASE }}assets/js/tableOrdering.js" defer></script>
+<script> const TABLE = 'offer' </script>
+<script> const TOTAL = {{ totalPages }} </script>
+<script> const CURRENT = {{ currentPage }} </script>
+<script> const FILTER = {{ filter }} </script>
+<script> const ORDER = {{ order }} </script>
+<script> const SORT = {{ sort }} </script>
+{% endblock %}

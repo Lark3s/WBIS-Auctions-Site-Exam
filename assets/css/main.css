@@ -21,7 +21,7 @@
 }
 
 #main {
-    height: 80vh;
+    min-height: 80vh;
 }
 #hello {
 
@@ -36,3 +36,25 @@
     width: 40px;
     /*font-size: 16pt;*/
 }
+
+table {
+    font-family: arial, sans-serif;
+    font-size: smaller;
+    border-collapse: collapse;
+    border: 1px solid #dddddd;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+/*table, td, th {*/
+/*    border: 1px solid black;*/
+/*}*/

@@ -48,9 +48,9 @@
 
 
     <script src="{{ BASE }}assets/js/categoryPagination.js" defer></script>
-    <script defer> const CATEGORY = {{ category.category_id }}</script>
-    <script defer> const TOTAL = {{ totalPages }}</script>
-    <script defer> const CURRENT = {{ currentPage }}</script>
+    <script> const CATEGORY = {{ category.category_id }}</script>
+    <script> const TOTAL = {{ totalPages }}</script>
+    <script> const CURRENT = {{ currentPage }}</script>
 {% endblock %}
 
 {% block naslov %}

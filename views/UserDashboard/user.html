@@ -1,0 +1,88 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% if isAdmin == true %}
+<div>
+    <p><a href="{{BASE}}user/profile/analytics/tables">Go back to table selection</a></p>
+</div>
+<div class="pb-2">
+    <p>Choose how you want to sort the data: </p>
+    <label for="field">Choose ordering:</label>
+    <select id="field">
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+    </select>
+
+    <label for="order">Choose a field to order by:</label>
+    <select id="order">
+        <option value="user_id">user_id</option>
+        <option value="forename">forename</option>
+        <option value="surname">surname</option>
+        <option value="address">address</option>
+        <option value="phone">phone</option>
+        <option value="email">email</option>
+        <option value="username">username</option>
+        <option value="created_at">created_at</option>
+        <option value="is_active">is_active</option>
+        <option value="role_id">role_id</option>
+    </select>
+
+    <button class="btn btn-primary" onclick="sort()">Sort</button>
+</div>
+    <table>
+        <tr>
+            <th>user_id</th>
+            <th>forename</th>
+            <th>surname</th>
+            <th>address</th>
+            <th>phone</th>
+            <th>email</th>
+            <th>username</th>
+            <th>created_at</th>
+            <th>is_active</th>
+            <th>role_id</th>
+            <th>actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{user.user_id}}</td>
+            <td>{{user.forename}}</td>
+            <td>{{user.surname}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.created_at}}</td>
+            <td>{{user.is_active}}</td>
+            <td>{{user.role_id}}</td>
+            <td><a href="{{ BASE }}user/profile/edit/{{user.user_id}}">Edit</a> / <a href="{{ BASE }}user/profile/delete/{{user.user_id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <nav aria-label="Page navigation example" class="width-100-percent d-flex">
+        <ul class="pagination mx-auto  justify-content-between">
+            <li class="page-item"><a class="page-link first" onclick="first()" href="#">First</a></li>
+            <li class="page-item"><a class="page-link prev" onclick="prev()" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+            <li class="page-item"><a class="page-link next" onclick="next()" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link last" onclick="last()" href="#">Last({{ totalPages }})</a></li>
+        </ul>
+        <!--            <div class="input-group col-1">-->
+        <label for="page-number" class="p-2">Jump to page:</label>
+        <input class="" id="page-number" type="number" value="{{ currentPage }}" min="1" max="{{ totalPages }}">
+        <button type="button" onclick="jumpToPage()" class="btn btn-primary input-group-append jump fa-solid fa-arrow-right fa-2"></button>
+        <!--            </div>-->
+
+    </nav>
+{% endif %}
+<p id="message" >{{ message|escape }}</p>
+
+<script src="{{ BASE }}assets/js/tablePagination.js" defer></script>
+<script> const TABLE = 'user' </script>
+<script> const TOTAL = {{ totalPages }} </script>
+<script> const CURRENT = {{ currentPage }} </script>
+<script> const FILTER = {{ filter }} </script>
+<script> const ORDER = {{ order }} </script>
+<script> const SORT = {{ sort }} </script>
+{% endblock %}

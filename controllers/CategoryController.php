@@ -32,7 +32,7 @@
             $totalPages = $auctionModel->getTotalPagesByTableAndId('category', $id, $itemsPerPage);
 
             if ($pageNumber > $totalPages) {
-                header('Location: /404');
+                header('Location: /notFound');
                 exit;
             }
 

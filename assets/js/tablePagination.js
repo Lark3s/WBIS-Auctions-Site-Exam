@@ -1,0 +1,40 @@
+const qinputs = document.querySelectorAll('#page-number');
+const allowedkeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"];
+
+qinputs.forEach(qinput => {
+    qinput.addEventListener('keydown', function handleClick(event) {
+        pressedKey = event['key'];
+        if (!allowedkeys.includes(pressedKey) && (isNaN(pressedKey) || (this.value.length > 1))) {
+            event.preventDefault();
+        }
+    });
+});
+
+function jumpToPage() {
+    let pageNumber = document.getElementById('page-number').value;
+
+    //TODO add filter/sort/order
+    window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/' + pageNumber;
+}
+
+function first() {
+    window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/1';
+}
+
+function last() {
+    window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/' + TOTAL;
+}
+
+function next() {
+    if (CURRENT < TOTAL) {
+        window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/' + (CURRENT+1);
+    }
+    return;
+}
+
+function prev() {
+    if (CURRENT > 1) {
+        window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/' + (CURRENT-1);
+    }
+    return;
+}
