@@ -35,7 +35,7 @@
             $auctionEndsAtTimestamp = strtotime($auction->expires_at);
             $currentTimestamp = time();
 
-            if (!$currentTimestamp > $auctionEndsAtTimestamp) {
+            if ($currentTimestamp > $auctionEndsAtTimestamp) {
                 $this->set('error', -20003);
                 $this->set('message', 'This auction has ended.');
                 return;

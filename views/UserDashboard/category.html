@@ -1,0 +1,66 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% if isAdmin == true %}
+<div>
+    <p><a href="{{BASE}}user/profile/analytics/tables">Go back to table selection</a></p>
+</div>
+<div class="pb-2">
+    <p>Choose how you want to sort the data: </p>
+    <label for="sort">Choose order direction:</label>
+    <select id="sort">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+
+    <label for="order">Choose a field to order by:</label>
+    <select id="order">
+        <option value="category_id">category_id</option>
+        <option value="name">name</option>
+    </select>
+
+    <button class="btn btn-primary" onclick="sort()">Sort</button>
+</div>
+<table>
+    <tr>
+        <th>category_id</th>
+        <th>name</th>
+        <th>actions</th>
+    </tr>
+    {% for category in categories %}
+    <tr>
+        <td>{{category.category_id}}</td>
+        <td>{{category.name}}</td>
+
+        <td><a href="{{ BASE }}user/profile/delete/{{category.category_id}}">Delete Ispraviti</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<nav aria-label="Page navigation example" class="width-100-percent d-flex">
+    <ul class="pagination mx-auto  justify-content-between">
+        <li class="page-item"><a class="page-link first" onclick="first()" href="#">First</a></li>
+        <li class="page-item"><a class="page-link prev" onclick="prev()" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+        <li class="page-item"><a class="page-link next" onclick="next()" href="#">Next</a></li>
+        <li class="page-item"><a class="page-link last" onclick="last()" href="#">Last({{ totalPages }})</a></li>
+    </ul>
+    <!--            <div class="input-group col-1">-->
+    <label for="page-number" class="p-2">Jump to page:</label>
+    <input class="" id="page-number" type="number" value="{{ currentPage }}" min="1" max="{{ totalPages }}">
+    <button type="button" onclick="jumpToPage()" class="btn btn-primary input-group-append jump fa-solid fa-arrow-right fa-2"></button>
+    <!--            </div>-->
+
+</nav>
+{% endif %}
+<p id="message" >{{ message|escape }}</p>
+
+<script src="{{ BASE }}assets/js/tablePagination.js" defer></script>
+<script src="{{ BASE }}assets/js/tableOrdering.js" defer></script>
+<script> const TABLE = 'category' </script>
+<script> const TOTAL = {{ totalPages }} </script>
+<script> const CURRENT = {{ currentPage }} </script>
+<!--<script> const FILTER = {{ filter }} </script>-->
+<script> const ORDER = '{{ order }}' </script>
+<script> const SORT = '{{ sort }}'  </script>
+{% endblock %}

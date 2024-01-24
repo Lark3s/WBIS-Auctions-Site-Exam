@@ -1,19 +1,30 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-<form action="{{ BASE }}user/login" method="POST">
-    <div>
-        <label for="input_username">Username</label>
-        <input type="text" id="input_username" name="login_username" required placeholder="Unesite svoje korisnicko ime">
-    </div>
-    <div>
-        <label for="input_password">Password</label>
-        <input type="password" id="input_password" name="login_password" required placeholder="Unesite svoju lozinku">
-    </div>
-    <div>
-        <button type="submit">
-            Log in
-        </button>
-    </div>
-</form>
+<div class="row my-4">
+    <form action="{{ BASE }}user/login" method="POST" class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-6 offset-lg-3">
+        <div class="card">
+            <div class="card-header text-center">
+                User login
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="input_username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="input_username" name="login_username" required placeholder="Unesite svoje korisnicko ime">
+                </div>
+                <div class="mb-3">
+                    <label for="input_password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="input_password" name="login_password" required placeholder="Unesite svoju lozinku">
+                </div>
+
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary">
+                    Log in
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
 {% endblock %}

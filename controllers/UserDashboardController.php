@@ -5,6 +5,7 @@
     use App\Core\Role\UserRoleController;
     use App\Models\AuctionModel;
     use App\Models\AuctionViewModel;
+    use App\Models\CategoryModel;
     use App\Models\OfferModel;
     use App\Models\UserModel;
 
@@ -111,6 +112,26 @@
             }
 
             $this->set('offers', $offers);
+            $this->set('totalPages', $totalPages);
+            $this->set('currentPage', $page);
+        }
+
+        public function category($page) {
+            $this->authorize();
+
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+
+            $itemsPerPage = 15;
+
+            $categories = $categoryModel->getByPageAndTable($page, $itemsPerPage);
+            $totalPages = $categoryModel->getTotalPagesByTable($itemsPerPage);
+
+            if ($page > $totalPages) {
+                header('Location: /notFound');
+                exit;
+            }
+
+            $this->set('categories', $categories);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
         }
