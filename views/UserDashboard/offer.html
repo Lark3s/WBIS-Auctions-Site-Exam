@@ -7,10 +7,10 @@
 </div>
 <div class="pb-2">
     <p>Choose how you want to sort the data: </p>
-    <label for="field">Choose ordering:</label>
-    <select id="field">
-        <option value="Ascending">Ascending</option>
-        <option value="Descending">Descending</option>
+    <label for="sort">Choose order direction:</label>
+    <select id="sort">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
     </select>
 
     <label for="order">Choose a field to order by:</label>
@@ -69,7 +69,7 @@
 <script> const TABLE = 'offer' </script>
 <script> const TOTAL = {{ totalPages }} </script>
 <script> const CURRENT = {{ currentPage }} </script>
-<script> const FILTER = {{ filter }} </script>
+<!--<script> const FILTER = {{ filter }} </script>-->
 <script> const ORDER = '{{ order }}' </script>
 <script> const SORT = '{{ sort }}'  </script>
 {% endblock %}

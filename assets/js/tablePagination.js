@@ -16,7 +16,7 @@ qinputs.forEach(qinput => {
 function jumpToPage() {
     let pageNumber = document.getElementById('page-number').value;
 
-    //TODO add filter/sort/order
+    //TODO add filter
     window.location.href = BASE + 'user/profile/analytics/tables/'+ TABLE +'/page/' + pageNumber + '/' + ORDER + '/' + SORT;
 }
 
