@@ -6,16 +6,25 @@
     <p>{{ auction.description|escape }}</p>
 <!--    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>-->
 <!--    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>-->
-    <p>Pocetna cena: <span id="current_auction_price">{{ lastOfferPrice }}</span> RSD
-        {% if showBidForm == true %}
-        <div class="form-group">
-            <input type="hidden" id="auction_id" value="{{ auction.auction_id }}">
-            <input type="number" min="{{ lastOfferPrice + 2.0 }}" step="0.01" value="{{ lastOfferPrice + 2.0 }}" id="offer_price" class="form-control">
-            <button type="button" onclick="auctionBid();" class="btn btn-primary">
-                <i class="fa fa-money"></i> Licitiraj
-            </button>
-        </div>
+    <p>Cena: <b><span id="current_auction_price">{{ lastOfferPrice }}</span> RSD</b>
+        {% if showBidForm == 1 %}
+            <div class="form-group">
+                <input type="hidden" id="auction_id" value="{{ auction.auction_id }}">
+                <input type="number" min="{{ lastOfferPrice + 2.0 }}" step="0.01" value="{{ lastOfferPrice + 2.0 }}" id="offer_price" class="form-control">
+                <button type="button" onclick="auctionBid();" class="btn btn-primary">
+                    <i class="fa fa-money"></i> Licitiraj
+                </button>
+            </div>
+        {% elseif showBidForm == 2 %}
+            <div>
+                <p>Morate biti ulogovani da date ponudu na aukciju!</p>
+            </div>
+        {% else %}
+            <div>
+                <p>Nazalost ova aukcija je istekla, ne mozete da ostavite ponudu!</p>
+            </div>
         {% endif %}
+
     </p>
     <p>Datum pocetka aukcije: {{ auction.created_at|date('j.n.Y.') }}</p>
     <p>Datum kraja aukcije: {{ auction.expires_at|date('j.n.Y.') }}</p>

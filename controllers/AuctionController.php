@@ -33,17 +33,17 @@ class AuctionController extends Controller {
             'user_agent' => $userAgent
         ]);
 
-        $this->set('showBidForm', 'true');
+        $this->set('showBidForm', 1);
 
         if ($this->getSession()->get('user_id') === null) {
-            $this->set('showBidForm', 'false');
+            $this->set('showBidForm', 2);
         }
 
         $auctionEndsAtTimestamp = strtotime($auction->expires_at);
         $currentTimestamp = time();
 
         if ($currentTimestamp > $auctionEndsAtTimestamp) {
-            $this->set('showBidForm', 'false');
+            $this->set('showBidForm', 0);
         }
     }
 
