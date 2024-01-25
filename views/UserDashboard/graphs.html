@@ -2,15 +2,15 @@
 
 {% block main %}
 {% if isAdmin == true %}
-<div>
+<div class="pt-3">
         <label for="table">Choose a table:</label>
-        <select id="table">
+        <select id="table" class="btn btn-secondary dropdown-toggle">
             <option value="user">User</option>
             <option value="auction">Auction</option>
         </select>
 
         <label for="time">Choose a table:</label>
-        <select id="time">
+        <select id="time" class="btn btn-secondary dropdown-toggle">
             <option value="year">Year</option>
             <option value="quarter">Quarter</option>
             <option value="month">Month</option>

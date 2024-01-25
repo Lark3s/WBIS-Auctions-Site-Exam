@@ -6,7 +6,7 @@
     <p>{{ auction.description|escape }}</p>
 <!--    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>-->
 <!--    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>-->
-    <p>Cena: <b><span id="current_auction_price">{{ lastOfferPrice }}</span> RSD</b>
+    <p>Cena: <b><span id="current_auction_price">{{ lastOfferPrice }}</span> EUR</b>
         {% if showBidForm == 1 %}
             <div class="form-group">
                 <input type="hidden" id="auction_id" value="{{ auction.auction_id }}">
