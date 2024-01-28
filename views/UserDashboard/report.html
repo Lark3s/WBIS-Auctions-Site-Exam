@@ -1,0 +1,96 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% if isAdmin == true %}
+<a href="{{BASE}}user/profile">Return to dashboard</a>
+<div class="my-4 card col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-lg-4">
+    <div class="card-header text-center">
+        Yearly report
+    </div>
+    <div class="card-body text-center">
+        <div class="">
+            <label for="input-year" class="form-label">Input year:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-year" type="number" min="2022" max="2024" value="2024">
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-primary" onclick="getYearlyReport()">Get report</button>
+    </div>
+</div>
+<div class="my-4 card col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-lg-4">
+    <div class="card-header text-center">
+        Quarterly report
+    </div>
+    <div class="card-body text-center">
+        <div class="">
+            <label for="input-yearQ" class="form-label">Input year:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-yearQ" type="number" min="2022" max="2024" value="2024">
+        </div>
+        <div class="">
+            <label for="input-quarter" class="form-label">Input quarter:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-quarter" type="number" min="1" max="4" value="1">
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-primary" onclick="getQuarterlyReport()">Get report</button>
+    </div>
+</div>
+<div class="my-4 card col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-lg-4">
+    <div class="card-header text-center">
+        Monthly report
+    </div>
+    <div class="card-body text-center">
+        <div class="">
+            <label for="input-yearM" class="form-label">Input year:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-yearM" type="number" min="2022" max="2024" value="2024">
+        </div>
+        <div class="">
+            <label for="input-month" class="form-label">Input month:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-month" type="number" min="1" max="12" value="1">
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-primary" onclick="getMonthlyReport()">Get report</button>
+    </div>
+</div>
+<div class="my-4 card col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-lg-4">
+    <div class="card-header text-center">
+        Weekly report
+    </div>
+    <div class="card-body text-center">
+        <div class="">
+            <label for="input-yearW" class="form-label">Input year:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-yearW" type="number" min="2022" max="2024" value="2024">
+        </div>
+        <div class="">
+            <label for="input-week" class="form-label">Input week:</label>
+        </div>
+        <div class="mb-3">
+            <input id="input-week" type="number" min="1" max="52" value="1">
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-primary" onclick="getWeeklyReport()">Get report</button>
+    </div>
+</div>
+
+<script src="{{ BASE }}assets/js/getReport.js" defer></script>
+{% endif %}
+<p id="message" >{{ message|escape }}</p>
+{% endblock %}

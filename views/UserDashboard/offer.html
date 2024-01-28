@@ -50,15 +50,13 @@
     <ul class="pagination mx-auto  justify-content-between">
         <li class="page-item"><a class="page-link first" onclick="first()" href="#">First</a></li>
         <li class="page-item"><a class="page-link prev" onclick="prev()" href="#">Previous</a></li>
-        <li class="page-item active"><a class="page-link" href="#">{{ currentPage }}</a></li>
+        <li class="page-item active"><a class="page-link" href="">{{ currentPage }}</a></li>
         <li class="page-item"><a class="page-link next" onclick="next()" href="#">Next</a></li>
         <li class="page-item"><a class="page-link last" onclick="last()" href="#">Last({{ totalPages }})</a></li>
     </ul>
-    <!--            <div class="input-group col-1">-->
     <label for="page-number" class="p-2">Jump to page:</label>
     <input class="" id="page-number" type="number" value="{{ currentPage }}" min="1" max="{{ totalPages }}">
     <button type="button" onclick="jumpToPage()" class="btn btn-primary input-group-append jump fa-solid fa-arrow-right fa-2"></button>
-    <!--            </div>-->
 
 </nav>
 {% endif %}

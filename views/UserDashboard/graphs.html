@@ -3,13 +3,14 @@
 {% block main %}
 {% if isAdmin == true %}
 <div class="pt-3">
+    <p>Count by time:</p>
         <label for="table">Choose a table:</label>
         <select id="table" class="btn btn-secondary dropdown-toggle">
             <option value="user">User</option>
             <option value="auction">Auction</option>
         </select>
 
-        <label for="time">Choose a table:</label>
+        <label for="time">Choose time:</label>
         <select id="time" class="btn btn-secondary dropdown-toggle">
             <option value="year">Year</option>
             <option value="quarter">Quarter</option>
@@ -18,13 +19,39 @@
         </select>
 
         <button class="btn btn-primary" onclick="getByTime()">Make chart</button>
+</div>
+<div class="mt-3 border-top">
+    <p>Chart revenue by time:</p>
+    <label for="category">Choose a category:</label>
+    <select id="category" class="btn btn-secondary dropdown-toggle">
+        <option value="All">All</option>
+        <option value="Slike">Slike</option>
+        <option value="Antikviteti">Antikviteti</option>
+        <option value="Instrumenti">Instrumenti</option>
+        <option value="Nakit">Nakit</option>
+        <option value="Numizmatika">Numizmatika</option>
+        <option value="Retro elektronika">Retro elektronika</option>
+        <option value="Skulpture">Skulpture</option>
+        <option value="Porcelan">Porcelan</option>
+    </select>
+    <label for="timeR">Choose time:</label>
+    <select id="timeR" class="btn btn-secondary dropdown-toggle">
+        <option value="year">Year</option>
+        <option value="quarter">Quarter</option>
+        <option value="month">Month</option>
+        <option value="week">Week</option>
+    </select>
 
+    <button class="btn btn-primary" onclick="chartRevenue()">Make chart</button>
+</div>
+<div class="mt-3 border-top">
     <div class="mx-auto p-2 chartDiv">
         <canvas id="myChart"></canvas>
     </div>
 </div>
+<script src="{{ BASE }}assets/js/chartData.js" defer></script>
 {% endif %}
     <p id="message" >{{ message|escape }}</p>
 
-    <script src="{{ BASE }}assets/js/chartData.js" defer></script>
+
 {% endblock %}

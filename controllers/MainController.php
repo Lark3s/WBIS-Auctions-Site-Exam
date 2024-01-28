@@ -62,8 +62,7 @@
                 'username' => $username,
                 'password' => $passwordHash,
                 'address'  => 'B.B. N.G.',         //TODO: ovo mora da se resi kada budem menjao bazu
-                'phone'    => '0690000000',        // i ovo
-                'salt'     => 'idk'                // a i ovo
+                'phone'    => '0690000000'        // i ovo
             ]);
 
             if (!$userId) {

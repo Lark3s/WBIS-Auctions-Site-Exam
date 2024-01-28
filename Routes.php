@@ -27,6 +27,7 @@ return [
 
     #Admin API routes
     Route::post('|^api/charts/time/?$|',                                                             'ApiChart',               'chartByTime'),
+    Route::post('|^api/charts/revenue/?$|',                                                          'ApiChart',               'chartRevenueByCategoryAndTime'),
 
     #User API routes
     Route::post('|^api/offer/make/?$|',                                                              'ApiUserOffer',           'postMakeOffer'),
@@ -39,6 +40,12 @@ return [
     Route::get('|^user/profile/analytics/tables/offer/page/([0-9]+)/([a-z_]+)/([a-z]+)/?$|',         'UserDashboard',          'offer'),
     Route::get('|^user/profile/analytics/tables/auction/page/([0-9]+)/([a-z_]+)/([a-z]+)/?$|',       'UserDashboard',          'auction'),
     Route::get('|^user/profile/analytics/tables/auctionView/page/([0-9]+)/([a-z_]+)/([a-z]+)/?$|',   'UserDashboard',          'auctionView'),
+    Route::get('|^user/profile/analytics/tables/category/page/([0-9]+)/([a-z_]+)/([a-z]+)/?$|',      'UserDashboard',          'category'),
+    Route::get('|^user/profile/analytics/report/?$|',                                                'UserDashboard',          'report'),
+    Route::get('|^user/profile/analytics/report/year/([0-9]+)/?$|',                                  'UserDashboard',          'reportYear'),
+    Route::get('|^user/profile/analytics/report/year/([0-9]+)/quarter/([0-9]+)/?$|',                 'UserDashboard',          'reportQuarter'),
+    Route::get('|^user/profile/analytics/report/year/([0-9]+)/month/([0-9]+)/?$|',                   'UserDashboard',          'reportMonth'),
+    Route::get('|^user/profile/analytics/report/year/([0-9]+)/week/([0-9]+)/?$|',                    'UserDashboard',          'reportWeek'),
 
     Route::get('|^user/categories/?$|',                                                              'UserCategoryManagement', 'categories'),
     Route::get('|^user/categories/edit/([0-9]+)/?$|',                                                'UserCategoryManagement', 'getEdit'),

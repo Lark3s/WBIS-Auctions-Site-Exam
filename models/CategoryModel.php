@@ -16,5 +16,16 @@
             ];
         }
 
+        public function getCategoryIdFromName($name) {
+            $sql = 'SELECT `category_id` FROM `category` WHERE `name` = ?;';
+            $prep = $this->getConnection()->prepare($sql);
+            $res = $prep->execute([$name]);
+            $item = NULL;
+            if ($res) {
+                $item = $prep->fetch(\PDO::FETCH_OBJ);
+            }
+            return $item;
+        }
+
 
     }

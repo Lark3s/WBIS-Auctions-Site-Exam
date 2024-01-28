@@ -1,8 +1,9 @@
 {% extends "_global/index.html" %}
 
 {% block main %}
-    <a href="#" onclick="addBookmark({{ auction.auction_id }})">Add to bookmark</a>
+<!--    <a href="#" onclick="addBookmark({{ auction.auction_id }})">Add to bookmark</a>-->
     <h1>{{ auction.title|escape }}</h1>
+    <p>Opis:</p>
     <p>{{ auction.description|escape }}</p>
 <!--    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>-->
 <!--    <p>Trenutna cena: {{ lastOfferPrice|escape }} RSD</p>-->
@@ -26,11 +27,11 @@
         {% endif %}
 
     </p>
-    <p>Datum pocetka aukcije: {{ auction.created_at|date('j.n.Y.') }}</p>
-    <p>Datum kraja aukcije: {{ auction.expires_at|date('j.n.Y.') }}</p>
+    <p>Datum pocetka aukcije: <b>{{ auction.created_at|date('j.n.Y.') }}</b></p>
+    <p>Datum kraja aukcije: <b>{{ auction.expires_at|date('j.n.Y.') }}</b></p>
+    <p>Ocena kvaliteta: <b>{{ auction.grade }}</b></p>
     <div id="message"></div>
 
-    <!--TODO: resiti ovaj script tag da ne stoji ovako -->
     <script src="{{ BASE }}assets/js/auctionBid.js" defer></script>
 
 {% endblock %}

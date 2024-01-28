@@ -2,6 +2,7 @@
     namespace App\Controllers;
 
     use App\Core\ApiController;
+    use App\Models\CategoryModel;
     use App\Models\ChartModel;
     use App\Models\UserModel;
 
@@ -9,7 +10,7 @@
         public function chartByTime() {
             $chartModel = new ChartModel($this->getDatabaseConnection());
 
-            $table = filter_input(INPUT_POST, 'table', FILTER_UNSAFE_RAW); //TODO: takodje unsafe raw
+            $table = filter_input(INPUT_POST, 'table', FILTER_UNSAFE_RAW);
             $dimension = filter_input(INPUT_POST, 'dimension', FILTER_UNSAFE_RAW);
 
             $tableName = $this->normaliseKeywords($table);
@@ -37,13 +38,84 @@
                     $label = 'error';
             }
 
-//            $chartData = $chartModel->countAllByYears($tableName);
-//            $chartData = $chartModel->countAllByDimension($tableName, $dimension);
+            $this->set('type', $dimensionName);
+            $this->set('label', $label);
+            $this->set('data', $chartData);
+        }
+
+        //lazily calculated as 15% of all sales
+        public function chartRevenueByCategoryAndTime() {
+            $chartModel = new ChartModel($this->getDatabaseConnection());
+
+            $category = filter_input(INPUT_POST, 'category', FILTER_UNSAFE_RAW);
+            $dimension = filter_input(INPUT_POST, 'dimension', FILTER_UNSAFE_RAW);
+
+            $categoryName = $this->normaliseKeywords($category);
+            $dimensionName = $this->normaliseKeywords($dimension);
+
+            if ($categoryName == 'All') {
+                switch ($dimensionName) {
+                    case 'year':
+                        $chartData = $chartModel->revenueByYear();
+                        $label = 'Revenue by years';
+                        break;
+                    case 'quarter':
+                        $chartData = $chartModel->revenueByQuarter();
+                        $label = 'Revenue by quarters';
+                        break;
+                    case 'month':
+                        $chartData = $chartModel->revenueByMonth();
+                        $label = 'Revenue by month';
+                        break;
+                    case 'week':
+                        $chartData = $chartModel->revenueByWeek();
+                        $label = 'Revenue by week';
+                        break;
+                    default:
+                        $chartData = null;
+                        $label = 'error';
+                }
+
+                $this->set('type', $dimensionName);
+                $this->set('label', $label);
+                $this->set('data', $chartData);
+                return;
+            }
+
+            $categoryModel = new CategoryModel($this->getDatabaseConnection());
+            $categoryId = $categoryModel->getCategoryIdFromName($categoryName);
+            $categoryId = $categoryId->category_id;
+
+            switch ($dimensionName) {
+                case 'year':
+                    $chartData = $chartModel->revenueByYearAndCategory($categoryId);
+                    $label = 'Revenue for ' . $categoryName . ' by years';
+                    break;
+                case 'quarter':
+                    $chartData = $chartModel->revenueByQuarterAndCategory($categoryId);
+                    $label = 'Revenue for ' . $categoryName . ' by quarters';
+                    break;
+                case 'month':
+                    $chartData = $chartModel->revenueByMonthAndCategory($categoryId);
+                    $label = 'Revenue for ' . $categoryName . ' by month';
+                    break;
+                case 'week':
+                    $chartData = $chartModel->revenueByWeekAndCategory($categoryId);
+                    $label = 'Revenue ' . $categoryName . ' by week';
+                    break;
+                default:
+                    $chartData = null;
+                    $label = 'error';
+            }
 
             $this->set('type', $dimensionName);
             $this->set('label', $label);
             $this->set('data', $chartData);
         }
+
+//        public function chartRevenueByCategory($id) {
+//            $sql = 'SELECT SUM(`starting_price`)*0.15 AS `sum_price` FROM `aukcije.auction` WHERE category_id = '.$id.' AND is_sold = 1';
+//        }
 
 
 
@@ -53,8 +125,3 @@
             return $keywords;
         }
     }
-
-    //SELECT YEAR(created_at) AS creation_year, COUNT(*) AS record_count
-    //FROM your_table
-    //GROUP BY creation_year
-    //ORDER BY creation_year;

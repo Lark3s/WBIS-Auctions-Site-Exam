@@ -1,0 +1,19 @@
+{% extends "_global/index.html" %}
+
+{% block main %}
+{% if isAdmin == true %}
+<a href="{{BASE}}user/profile">Return to dashboard</a>
+<h1>Yearly report for {{ reportData[0] }}</h1>
+<ul>
+    <li>Year                           : <b>{{ reportData[0] }}</b></li>
+    <li>Number of new users            : <b>{{ reportData[1] }}</b></li>
+    <li>Number of new auctions         : <b>{{ reportData[2] }}</b></li>
+    <li>Revenue                        : <b>{{ reportData[3] }}</b></li>
+    <li>Category with most new auctions: <b>{{ reportData[4] }}</b></li>
+    <li>Auction with most views        : <b>{{ reportData[5] }}</b></li>
+</ul>
+
+<a href="/assets/report/report.json" download="report.json">Download JSON</a>
+{% endif %}
+<p id="message" >{{ message|escape }}</p>
+{% endblock %}

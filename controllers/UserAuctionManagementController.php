@@ -31,6 +31,7 @@
 //                'starts_at'      => filter_input(INPUT_POST, 'starts_at', FILTER_UNSAFE_RAW),
                 'expires_at'     => filter_input(INPUT_POST, 'expires_at', FILTER_UNSAFE_RAW),
                 'category_id'    => filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT),
+//                'grade'    => filter_input(INPUT_POST, 'grade', FILTER_SANITIZE_NUMBER_INT),
                 'user_id'        => $this->getSession()->get('user_id')
             ];
 
@@ -56,19 +57,34 @@
             $auction = $auctionModel->getById($auctionId);
 
             if (!$auction) {
-                $this->redirect( \Configuration::BASE . 'user/auctions' );
+//                $this->redirect( \Configuration::BASE . 'user/auctions' );
+                $this->set('message', 'Doslo je do greske, aukcija ne postoji');
                 return;
             }
 
             if ($auction->user_id != $this->getSession()->get('user_id')) {
-                $this->redirect(\Configuration::BASE . 'user/auctions');
+//                $this->redirect(\Configuration::BASE . 'user/auctions');
+                $this->set('message', 'Doslo je do greske, niste vlasnik aukcije');
+                return;
+            }
+
+
+            $auctionEndsAtTimestamp = strtotime($auction->expires_at);
+            $currentTimestamp = time();
+
+            if ($currentTimestamp > $auctionEndsAtTimestamp) {
+//                $this->redirect(\Configuration::BASE . 'user/auctions');// TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
+                $this->set('message', 'Doslo je do greske, aukcija je istekla');
                 return;
             }
 
             $offerModel = new OfferModel($this->getDatabaseConnection());
             $offer = $offerModel->getAllByAuctionId($auctionId);
-            if (count($offer) > 0) {
-                $this->redirect( \Configuration::BASE . 'user/auctions' ); // TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
+
+
+            if (!count($offer) > 0) {
+//                $this->redirect(\Configuration::BASE . 'user/auctions');// TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
+                $this->set('message', 'Doslo je do greske, aukcija ima ponuda');
                 return;
             }
 
@@ -80,6 +96,7 @@
             $categoryModel = new CategoryModel($this->getDatabaseConnection());
             $categories = $categoryModel->getAll();
             $this->set('categories', $categories);
+//            $this->set('message', 'test');
         }
 
         public function postEdit($auctionId) {

@@ -26,11 +26,11 @@
                 return;
             }
 
-//            if (!$auction->is_active) {
-//                $this->set('error', -20002);
-//                $this->set('message', 'This auction is not active.');  //TODO: ovo obavezno da se resi, nemam is_active u bazi
-//                return;
-//            }
+            if (!$auction->is_active) {
+                $this->set('error', -20002);
+                $this->set('message', 'This auction is not active.');  //TODO: ovo obavezno da se resi, nemam is_active u bazi
+                return;
+            }
 
             $auctionEndsAtTimestamp = strtotime($auction->expires_at);
             $currentTimestamp = time();
@@ -83,7 +83,8 @@
             $this->set('message', 'Success.');
             $this->set('offer_id', $offerId);
 
-            $this->notifyUser($auction, $offerId);
+            //TODO: integrisati neki fake-mail mehanizam za slanje obavestenja
+            //$this->notifyUser($auction, $offerId);
         }
 
         private function notifyUser(&$auction, int $offerId) {
@@ -99,7 +100,7 @@
             $html .= '&quot; sa iznosom ' . sprintf("%.2f", $offer->price);
             $html .= '</body></html>';
 
-            //TODO: trebao bi da se napravi helper za slanje mejlova, ako to ostane kao funkcionalnost u kranjoj verziji, factory/builder ili singleton pattern
+            //TODO: trebao bi da se napravi helper za slanje mejlova, ako to ostane kao funkcionalnost u kranjoj verziji
             // ^- ovo je donekle reseno
 
             $event = new EmailEventHandler();

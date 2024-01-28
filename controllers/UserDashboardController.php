@@ -7,6 +7,7 @@
     use App\Models\AuctionViewModel;
     use App\Models\CategoryModel;
     use App\Models\OfferModel;
+    use App\Models\ReportModel;
     use App\Models\UserModel;
 
     class UserDashboardController extends UserRoleController {
@@ -103,7 +104,11 @@
 
             $itemsPerPage = 15;
 
-            $offers = $offerModel->getByPageAndTable($page, $itemsPerPage);
+            $orderingAndSorting = $this->getOrderingAndSorting($_GET["URL"]);
+            $orderBy = $orderingAndSorting[1];
+            $sortBy = $orderingAndSorting[0];
+
+            $offers = $offerModel->getByPageAndTableAndSortAndOrder($page, $itemsPerPage, $orderBy, $sortBy);
             $totalPages = $offerModel->getTotalPagesByTable($itemsPerPage);
 
             if ($page > $totalPages) {
@@ -114,6 +119,8 @@
             $this->set('offers', $offers);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
+            $this->set('sort', $sortBy);
+            $this->set('order', $orderBy);
         }
 
         public function category($page) {
@@ -123,7 +130,11 @@
 
             $itemsPerPage = 15;
 
-            $categories = $categoryModel->getByPageAndTable($page, $itemsPerPage);
+            $orderingAndSorting = $this->getOrderingAndSorting($_GET["URL"]);
+            $orderBy = $orderingAndSorting[1];
+            $sortBy = $orderingAndSorting[0];
+
+            $categories = $categoryModel->getByPageAndTableAndSortAndOrder($page, $itemsPerPage, $orderBy, $sortBy);
             $totalPages = $categoryModel->getTotalPagesByTable($itemsPerPage);
 
             if ($page > $totalPages) {
@@ -134,9 +145,147 @@
             $this->set('categories', $categories);
             $this->set('totalPages', $totalPages);
             $this->set('currentPage', $page);
+            $this->set('sort', $sortBy);
+            $this->set('order', $orderBy);
         }
 
-        function getOrderingAndSorting($url) {
+        public function report() {
+            $this->authorize();
+
+
+
+        }
+        public function reportYear($year) {
+            $this->authorize();
+
+            $reportModel = new ReportModel($this->getDatabaseConnection());
+
+            $noOfNewUsers = $reportModel->newUsers($year, null, 'year');
+            $noOfNewAuctions = $reportModel->newAuctions($year, null, 'year');
+            $revenue = $reportModel->revenue($year, null, 'year');
+            $categoryWithMostNewAuctions = $reportModel->mostPopularCategory($year, null, 'year');
+            $auctionWithMostViews = $reportModel->mostPopularAuction($year, null, 'year');
+
+            $reportData = array(
+                $year,
+                $noOfNewUsers,
+                $noOfNewAuctions,
+                $revenue,
+                $categoryWithMostNewAuctions,
+                $auctionWithMostViews
+            );
+
+            $json_data = json_encode($reportData, JSON_PRETTY_PRINT);
+
+            $file_path = \Configuration::REPORT_PATH;
+
+            file_put_contents($file_path, $json_data);
+            $this->set('reportData', $reportData);
+        }
+        public function reportQuarter($year) {
+            $this->authorize();
+
+            preg_match_all('|\d+|', $_GET["URL"], $digitsFromURL);
+            $digitsFromURL = $digitsFromURL[0];
+
+            $quarter = $digitsFromURL[1];
+
+            $reportModel = new ReportModel($this->getDatabaseConnection());
+
+            $noOfNewUsers = $reportModel->newUsers($year, $quarter, 'quarter');
+            $noOfNewAuctions = $reportModel->newAuctions($year, $quarter, 'quarter');
+            $revenue = $reportModel->revenue($year, $quarter, 'quarter');
+            $categoryWithMostNewAuctions = $reportModel->mostPopularCategory($year, $quarter, 'quarter');
+            $auctionWithMostViews = $reportModel->mostPopularAuction($year, $quarter, 'quarter');
+
+            $reportData = array(
+                $year,
+                $quarter,
+                $noOfNewUsers,
+                $noOfNewAuctions,
+                $revenue,
+                $categoryWithMostNewAuctions,
+                $auctionWithMostViews
+            );
+
+            $json_data = json_encode($reportData, JSON_PRETTY_PRINT);
+
+            $file_path = \Configuration::REPORT_PATH;
+
+            file_put_contents($file_path, $json_data);
+            return $reportData;
+
+        }
+        public function reportMonth($year) {
+            $this->authorize();
+
+            preg_match_all('|\d+|', $_GET["URL"], $digitsFromURL);
+            $digitsFromURL = $digitsFromURL[0];
+
+            $month = $digitsFromURL[1];
+
+            $reportModel = new ReportModel($this->getDatabaseConnection());
+
+            $noOfNewUsers = $reportModel->newUsers($year, $month, 'month');
+            $noOfNewAuctions = $reportModel->newAuctions($year, $month, 'month');
+            $revenue = $reportModel->revenue($year, $month, 'month');
+            $categoryWithMostNewAuctions = $reportModel->mostPopularCategory($year, $month, 'month');
+            $auctionWithMostViews = $reportModel->mostPopularAuction($year, $month, 'month');
+
+            $reportData = array(
+                $year,
+                $month,
+                $noOfNewUsers,
+                $noOfNewAuctions,
+                $revenue,
+                $categoryWithMostNewAuctions,
+                $auctionWithMostViews
+            );
+
+            $json_data = json_encode($reportData, JSON_PRETTY_PRINT);
+
+            $file_path = \Configuration::REPORT_PATH;
+
+            file_put_contents($file_path, $json_data);
+            return $reportData;
+
+        }
+        public function reportWeek($year) {
+            $this->authorize();
+
+            preg_match_all('|\d+|', $_GET["URL"], $digitsFromURL);
+            $digitsFromURL = $digitsFromURL[0];
+
+            $week = $digitsFromURL[1];
+
+            $reportModel = new ReportModel($this->getDatabaseConnection());
+
+            $noOfNewUsers = $reportModel->newUsers($year, $week, 'week');
+            $noOfNewAuctions = $reportModel->newAuctions($year, $week, 'week');
+            $revenue = $reportModel->revenue($year, $week, 'week');
+            $categoryWithMostNewAuctions = $reportModel->mostPopularCategory($year, $week, 'week');
+            $auctionWithMostViews = $reportModel->mostPopularAuction($year, $week, 'week');
+
+            $reportData = array(
+                $year,
+                $week,
+                $noOfNewUsers,
+                $noOfNewAuctions,
+                $revenue,
+                $categoryWithMostNewAuctions,
+                $auctionWithMostViews
+            );
+
+            $json_data = json_encode($reportData, JSON_PRETTY_PRINT);
+
+            $file_path = \Configuration::REPORT_PATH;
+
+            file_put_contents($file_path, $json_data);
+            return $reportData;
+        }
+
+
+        public function getOrderingAndSorting($url) {
             $urlComponents = parse_url($url);
             $result = null;
             if (isset($urlComponents['path'])) {

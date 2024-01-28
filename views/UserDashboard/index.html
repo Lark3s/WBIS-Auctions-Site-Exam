@@ -3,21 +3,26 @@
 {% block main %}
 {% if isAdmin == true %}
     <div>
-        <a href="{{ BASE }}user/profile/analytics/graphs">
-            <i class="fa fa-chart-simple"></i>Graphs
+        <a href="{{ BASE }}user/profile/analytics/graphs" class="text-decoration-none">
+            <i class="fa fa-chart-simple"></i> Graphs
         </a>
     </div>
     <div>
-        <a href="{{ BASE }}user/profile/analytics/tables">
-            <i class="fa fa-table-list"></i>Tables
+        <a href="{{ BASE }}user/profile/analytics/tables" class="text-decoration-none">
+            <i class="fa fa-table-list"></i> Tables
+        </a>
+    </div>
+    <div>
+        <a href="{{ BASE }}user/profile/analytics/report" class="text-decoration-none">
+            <i class="fa-solid fa-book"></i> Report
         </a>
     </div>
 
+
 {% endif %}
     <div>
-        <a href="{{ BASE }}user/auctions">
+        <a href="{{ BASE }}user/auctions" class="text-decoration-none">
             <i class="fa fa-list"></i> List my auctions
         </a>
     </div>
-<!--<p>{{ message|escape }}</p>-->
 {% endblock %}
