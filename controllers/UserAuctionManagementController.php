@@ -73,7 +73,6 @@
             $currentTimestamp = time();
 
             if ($currentTimestamp > $auctionEndsAtTimestamp) {
-//                $this->redirect(\Configuration::BASE . 'user/auctions');// TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
                 $this->set('message', 'Doslo je do greske, aukcija je istekla');
                 return;
             }
@@ -83,7 +82,6 @@
 
 
             if (!count($offer) > 0) {
-//                $this->redirect(\Configuration::BASE . 'user/auctions');// TODO: Trenutno radi samo redirect ako aukcija nema ponuda, ali treba napraviti neki mehanizam da izbaci neku povratnu informaciju o tome
                 $this->set('message', 'Doslo je do greske, aukcija ima ponuda');
                 return;
             }
