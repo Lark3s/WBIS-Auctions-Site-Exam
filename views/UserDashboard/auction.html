@@ -26,6 +26,7 @@
         <option value="image_path">image_path</option>
         <option value="starting_price">starting_price</option>
         <option value="is_active">is_active</option>
+        <option value="is_sold">is_sold</option>
     </select>
 
     <button class="btn btn-primary" onclick="sort()">Sort</button>
@@ -42,8 +43,8 @@
         <th>image_path</th>
         <th>starting_price</th>
         <th>is_active</th>
-        <th>grade</th>
-        <th>actions</th>
+        <th>is_sold</th>
+<!--        <th>actions</th>-->
     </tr>
     {% for auction in auctions %}
     <tr>
@@ -57,8 +58,8 @@
         <td>{{auction.image_path}}</td>
         <td>{{auction.starting_price}}</td>
         <td>{{auction.is_active  }}</td>
-        <td>{{auction.grade }}</td>
-        <td><a href="{{ BASE }}user/profile/edit/{{auction.auction_id }}">Edit</a> / <a href="{{ BASE }}user/profile/delete/{{auction.auction_id }}">Delete</a></td>
+        <td>{{auction.is_sold }}</td>
+<!--        <td><a href="{{ BASE }}user/profile/edit/{{auction.auction_id }}">Edit</a> / <a href="{{ BASE }}user/profile/delete/{{auction.auction_id }}">Delete</a></td>-->
     </tr>
     {% endfor %}
 </table>

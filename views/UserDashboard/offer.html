@@ -31,7 +31,7 @@
         <th>user_id</th>
         <th>auction_id</th>
         <th>price</th>
-        <th>actions</th>
+<!--        <th>actions</th>-->
     </tr>
     {% for offer in offers %}
     <tr>
@@ -41,7 +41,7 @@
         <td>{{offer.auction_id}}</td>
         <td>{{offer.price}}</td>
 
-        <td><a href="{{ BASE }}user/profile/delete/{{offer.offer_id}}">Delete</a></td>
+<!--        <td><a href="{{ BASE }}user/profile/delete/{{offer.offer_id}}">Delete</a></td>-->
     </tr>
     {% endfor %}
 </table>

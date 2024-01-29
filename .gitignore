@@ -3,5 +3,6 @@ vendor/
 sessions/
 assets/libs/
 assets/uploads/
+assets/report/report.json
 .idea/
 Configuration.php

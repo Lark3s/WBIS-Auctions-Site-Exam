@@ -25,14 +25,14 @@
     <tr>
         <th>category_id</th>
         <th>name</th>
-        <th>actions</th>
+<!--        <th>actions</th>-->
     </tr>
     {% for category in categories %}
     <tr>
         <td>{{category.category_id}}</td>
         <td>{{category.name}}</td>
 
-        <td><a href="{{ BASE }}user/profile/delete/{{category.category_id}}">Delete Ispraviti</a></td>
+<!--        <td><a href="{{ BASE }}user/profile/delete/{{category.category_id}}">Delete Ispraviti</a></td>-->
     </tr>
     {% endfor %}
 </table>

@@ -41,7 +41,7 @@
             <th>created_at</th>
             <th>is_active</th>
             <th>role_id</th>
-            <th>actions</th>
+<!--            <th>actions</th>-->
         </tr>
         {% for user in users %}
         <tr>
@@ -55,7 +55,7 @@
             <td>{{user.created_at}}</td>
             <td>{{user.is_active}}</td>
             <td>{{user.role_id}}</td>
-            <td><a href="{{ BASE }}user/profile/edit/{{user.user_id}}">Edit</a> / <a href="{{ BASE }}user/profile/delete/{{user.user_id}}">Delete</a></td>
+<!--            <td><a href="{{ BASE }}user/profile/edit/{{user.user_id}}">Edit</a> / <a href="{{ BASE }}user/profile/delete/{{user.user_id}}">Delete</a></td>-->
         </tr>
         {% endfor %}
     </table>

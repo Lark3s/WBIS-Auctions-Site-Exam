@@ -21,7 +21,7 @@
                 'title'           => new Field((new StringValidator())->setMaxLength(255)),
                 'image_path'      => new Field((new StringValidator())->setMaxLength(255)),
                 'description'     => new Field((new StringValidator())->setMaxLength(64*1024)),
-                'grade'           => new Field((new StringValidator())->setMaxLength(1)),
+//                'grade'           => new Field((new StringValidator())->setMaxLength(1)),
                 'starting_price'  => new Field((new NumberValidator())->setDecimal()->setUnsigned()->setIntegerLength(7)->setMaxDecimalDigits(2))
             ];
         }

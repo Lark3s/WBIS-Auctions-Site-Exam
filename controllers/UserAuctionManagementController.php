@@ -81,7 +81,7 @@
             $offer = $offerModel->getAllByAuctionId($auctionId);
 
 
-            if (!count($offer) > 0) {
+            if (count($offer) > 0) {
                 $this->set('message', 'Doslo je do greske, aukcija ima ponuda');
                 return;
             }

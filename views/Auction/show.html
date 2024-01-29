@@ -3,6 +3,7 @@
 {% block main %}
 <!--    <a href="#" onclick="addBookmark({{ auction.auction_id }})">Add to bookmark</a>-->
     <h1>{{ auction.title|escape }}</h1>
+<img src="{{ BASE }}assets/uploads/{{ auction.image_path }}" alt="Velika slika - {{ auction.auction_id }}">
     <p>Opis:</p>
     <p>{{ auction.description|escape }}</p>
 <!--    <p>Pocetna cena: {{ auction.starting_price|escape }} RSD</p>-->
@@ -29,7 +30,7 @@
     </p>
     <p>Datum pocetka aukcije: <b>{{ auction.created_at|date('j.n.Y.') }}</b></p>
     <p>Datum kraja aukcije: <b>{{ auction.expires_at|date('j.n.Y.') }}</b></p>
-    <p>Ocena kvaliteta: <b>{{ auction.grade }}</b></p>
+<!--    <p>Ocena kvaliteta: <b>{{ auction.grade }}</b></p>-->
     <div id="message"></div>
 
     <script src="{{ BASE }}assets/js/auctionBid.js" defer></script>
